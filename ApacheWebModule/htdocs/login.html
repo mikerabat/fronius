@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/libs/login.css">
+<title> Solar login </title>
+<script type="text/javascript" src="./libs/base64.js" language="javascript"></script>
+	<script type="text/javascript" src="./libs/cbor.js" language="javascript"></script>
+	<script type="text/javascript" src="./libs/jquery-3.2.1.min.js" language="javascript"></script>
+	<script type="text/javascript" src="webauthn.js" language="javascript"></script>
+	
+	<script type="text/javascript">
+	var shost = '';
+	
+	$(function() {
+		    // check the current status... redirect to login if necessary...
+	        $.ajax({
+                url: '/fronius/checksession',
+		        xhrFields: {
+				  withCredentials: true
+				},      
+				//crossDomain: true,
+				dataType: "json",
+                success: function(resp) {
+				         if(resp.session==1) {
+						    // ############################################
+							// #### we have a sessions -> now visit the main site
+							window.location.replace('https://' + resp.host + '/index.html');
+							
+						 } else {
+						    
+						    // not logged in -> stay here
+							detectWebAuthnSupport();
+							getFidoSettings();	
+						 }
+					  },
+				error: function(xhr, status, error ) {
+				   // an error occured -> just stay here
+				   
+				   
+				}
+		});
+		});
+	</script>
+	
+</head>
+<body>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <div class="login">
+          <div class="login-header">
+            <h3>Solar LOGIN</h3>
+            <p>Please use your passkey to login.</p>
+          </div>
+        </div>
+        <!-- <form class="login-form"> -->
+          <input type="email" id="input-email" placeholder="username"/>
+          <button onclick="getAssertion()" id="login-button">login</button>
+		  <p id="register-paragraph" class="message">Not registered? <a onclick="makeCredential()" id="register-button">Register a device</a></p>
+        <!-- </form>-->
+      </div>
+    </div>
+</body>
+</body>
+</html>

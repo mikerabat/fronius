@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  font-family: 'Lato';
+}
+
+/* Alinhar ao centro tudo que estiver dentro do body */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.content{
+  display: grid;
+  grid-template-rows: 40px 1fr;
+  /* 40px: para a 1° linha(header) e 1fr para que a 2°(main) seja flexivel(use todo o conteúdo disponivel) */
+  gap: 24px;
+  
+  padding: 32px;
+  background-color: #fff;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, .16);
+  border-radius: 16px;
+  width: fit-content;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-weight: 700;
+  color: #333;
+}
+
+header i {
+  padding: 16px;
+  border-radius: 50%;
+  color: #666;
+}
+
+header i:hover {
+  background-color: #ECE0FD;
+}
+
+.main-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.main-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.main-months > div {
+  width: 82px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #666;
+
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.main-days > div {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #666;
+
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+main>div:hover {
+  background-color: #ECE0FD;
+  border-radius: 8px;
+}
+
+main>div.active {
+  background: #6200EE;
+  border-radius: 8px;
+  font-weight: 700;
+  color: white;
+
+  position: relative;
+}
+
+main>div.active::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 6px;
+}

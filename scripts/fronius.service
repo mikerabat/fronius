@@ -1,0 +1,19 @@
+[Unit]
+Description=Fronius data collection service
+After=firebird3.0
+
+[Service]
+User=root
+
+#Code to execute
+#Can be the path to an executable or code itself
+
+WorkingDirectory=/etc/init.d
+ExecStart=/etc/init.d/fronius start
+Type=simple
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

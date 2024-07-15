@@ -1,0 +1,154 @@
+program froniusd;
+
+uses
+  cthreads,
+  Classes, SysUtils,
+  BaseUnix,
+  Fronius.Consts,
+  Fronius.Data,
+  Fronius.DB,
+  Fronius.EnergyEstimate,
+  Fronius.Linux.DB,
+  Fronius.Linux.Log;
+
+
+
+var engEstThr : TFroniusEnergyEstThr;
+    dbAdapt : IFroninusDBAdapter;
+    DataMod : TFroniusDB;
+    log : TFroniusLogFile;
+    pidFile : string;
+
+// from daemonapp.inc
+procedure DaemonizeProgram;
+var pid, sid : TPid;
+begin
+     log.LogMsg('trying to daemonize...');
+     pid := FpFork;
+     if (pid<0) then
+        raise Exception.Create('Failed to fork daemon process.');
+
+     if pid>0 then
+     begin
+          log.LogMsg('Exiting main program');
+          // We are now in the main program, which has to terminate
+          FpExit(0);
+     end
+     else
+     begin
+          log.LogMsg('In daemon code now - updating handles');
+          // Here we are in the daemonized proces
+          sid := FpSetsid;
+          if sid < 0 then
+             raise Exception.Create('Failed to fork daemon process.');
+          // Reset the file-mask
+          FpUmask(0);
+          // Change the current directory, to avoid locking the current directory
+          chdir('/');
+          FpClose(StdInputHandle);
+          FpClose(StdOutputHandle);
+          FpClose(StdErrorHandle);
+          log.LogMsg('Now we are a daemon...');
+    end;
+end;
+
+procedure FreeObjs;
+begin
+     engEstThr.SigTerminate;
+     FreeAndNil(engEstThr);
+     dbAdapt := nil;
+     FreeAndNil(dataMod);
+     FreeAndNil(log);
+end;
+
+Procedure DoShutDown(Sig : Longint; Info : PSigInfo; Context : PSigContext); cdecl;
+begin
+     FreeObjs;
+end;
+
+
+procedure InitSigHandlers;
+
+  procedure installhandler(aSig : Longint);
+  var old,new : SigactionRec;
+  begin
+       FillChar(New, SizeOf(Sigactionrec), #0);
+       FillChar(Old, SizeOf(Sigactionrec), #0);
+       New.sa_handler := @DoShutDown;
+       fpSigaction(aSig, @New, @Old);
+  end;
+
+begin
+     InstallHandler(SIGQUIT);
+     InstallHandler(SIGTERM);
+     InstallHandler(SIGINT);
+end;
+
+procedure StartEngThread;
+var conf : IFroniusConf;
+begin
+     conf := FroniusConfig;
+
+     log.LogMsg('Start data collector thread for host ' + conf.FroniusHost);
+     engEstThr := TFroniusEnergyEstThr.Create(conf.FroniusHost);
+     engEstThr.OnUpdate := @dataMod.OnEnergyUpdate;
+	 engEstThr.OnMeterSample := @dataMod.OnMeterUpdate;
+     engEstThr.OnConnectionErr := @dataMod.OnEnergyError;
+     engEstThr.Start;
+end;
+
+procedure OpenDB;
+var errStr : string;
+begin
+     dbAdapt := TdmFronius.Create(nil);
+     dbAdapt.SetLogEvt( @log.LogEvt );
+
+     if not dbAdapt.ConnectToDB(errStr) then
+     begin
+          log.LogMsg('Failed to connect to the database');
+          log.LogMsg('Failed with msg: ' + errStr);
+     end
+     else
+     begin
+          DataMod := TFroniusDB.Create;
+          DataMod.OnLog :=  @log.LogEvt;
+
+          DataMod.SetAdapter(dbAdapt);
+          log.LogMsg('Connected db: ' + BoolToStr(dbAdapt.IsConnected, True));
+     end;
+end;
+
+begin
+     try
+        // ###################################
+        // #### Start thread and DB
+        log := TFroniusLogFile.Create;
+        try
+           // ###################################
+           // #### Daemonize stuff
+           if FindCmdLineSwitch('daemon', ['-'], true) then
+           begin
+                DaemonizeProgram;
+                InitSigHandlers;
+           end;
+
+           OpenDB;
+           StartEngThread;
+
+           // ###################################
+           // #### wait around for signals...
+           fpPause;
+
+           log.LogMsg('Finished');
+        finally
+               FreeObjs;
+        end;
+     except
+           on E : Exception do
+           begin
+                Writeln('Fronius Daemon ended with message: ' + e.message);
+           end;
+     end;
+
+end.
+

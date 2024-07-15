@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <FRMtype Value="0"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="53"/>
+        <CursorPos X="82" Y="73"/>
+        <UsageCount Value="161"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Fronius.Linux.DBCreate.frm"/>
+        <FRMtype Value="0"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="14" Y="3"/>
+        <UsageCount Value="179"/>
+        <DefaultSyntaxHighlighter Value="FRM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <FRMtype Value="300"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dmFroniusDBCreate"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="30"/>
+        <CursorPos Y="46"/>
+        <UsageCount Value="179"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <CursorPos Y="23"/>
+        <UsageCount Value="162"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CreatedFroniusDB.dpr"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="50"/>
+        <UsageCount Value="24"/>
+        <Bookmarks Count="1">
+          <Item0 X="14" Y="92" ID="1"/>
+        </Bookmarks>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Fronius.Win.DBCreate.pas"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="128" Y="7"/>
+        <UsageCount Value="4"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Fronius.Linux.DBCreate.dfm"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="4"/>
+        <DefaultSyntaxHighlighter Value="FRM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/runtime/ibxscript.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="251"/>
+        <CursorPos X="3" Y="269"/>
+        <UsageCount Value="4"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="51" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="53" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="52" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="53" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="50" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="54" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="42" Column="103" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="54" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="42" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="54" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="55" Column="45" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="58" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="59" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="37" Column="99" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="42" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="54" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="57" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="58" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="59" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="60" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="Fronius.Linux.DBCreate.pas"/>
+        <Caret Line="62" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="29" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="90" TopLine="65"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="31" Column="14" TopLine="13"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="97" Column="41" TopLine="65"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="31" Column="11" TopLine="13"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="197" Column="6" TopLine="180"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="110" Column="56" TopLine="72"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="31" Column="75" TopLine="12"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="89" Column="64" TopLine="69"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default">
+        <Mode Name="default">
+          <local>
+            <CommandLineParams Value="-db /home/rabatscher/Documents/Fronius/DB/fronius.fdb -sql /home/rabatscher/Documents/Fronius/DB/froniusdb.sql"/>
+          </local>
+        </Mode>
+      </Modes>
+    </RunParams>
+    <HistoryLists>
+      <List Name="LaunchingApplication" Type="File" Count="5">
+        <Item1 Value="/usr/bin/xterm -T &apos;Typhon Run Output&apos; -e $(TargetCmdLine)"/>
+        <Item2 Value="${CmdExe} ${TargetCmdLine}"/>
+        <Item3 Value="&quot;$(Pas2JSBrowser)&quot; &quot;$(Pas2JSProjectURL)&quot;"/>
+        <Item4 Value="$(Pas2JSBrowser) &quot;$(Pas2JSProjectURL)&quot;"/>
+        <Item5 Value="/usr/bin/gnome-terminal -t &apos;Typhon Run Output&apos; -e &apos;$(TargetCmdLine)&apos;"/>
+      </List>
+      <List Name="CommandLineParameters" Count="3">
+        <Item1 Value="-db /home/rabatscher/Documents/Fronius/DB/fronius.fdb -sql /home/rabatscher/Documents/Fronius/DB/froniusdb.sql"/>
+        <Item2 Value="-db /home/rabatscher/Documents/Fronius/fronius.fdb -sql /home/rabatscher/Documents/Fronius/froniusdb.sql"/>
+        <Item3 Value="-db fronius.fdb"/>
+      </List>
+    </HistoryLists>
+  </ProjectSession>
+</CONFIG>

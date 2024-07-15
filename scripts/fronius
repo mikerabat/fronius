@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# This file belongs in /etc/init.d where it will be run
+# on system startup and shutdown to start the
+# fronius data collection daemon
+
+
+# This init script contains functions specific for debian
+# init scripts.
+
+# source LSB function library
+. /lib/lsb/init-functions
+
+set -e
+
+FRONIUSD=/usr/bin/froniusd
+NAME="Fronius data collection service"
+FRONOPTS="-daemon"
+
+[ -x $FRONIUSD ] || exit 0
+
+
+# See how we were called.
+case "${1:-}" in
+    start)
+    if pidof $FRONIUSD > /dev/null; then
+        log_success_msg "$NAME already running"
+        RETVAL=0
+    else
+        log_action_begin_msg "Starting $NAME"
+        
+        # remove stale pid file
+        start-stop-daemon --start --quiet --exec $FRONIUSD -- $FRONOPTS 2>&1 | ( grep -v 'Fronius data service has been successfully started' || true )
+        RETVAL=$?
+        log_action_end_msg $RETVAL
+    fi
+    ;;
+
+    stop)
+    if pidof $FRONIUSD > /dev/null; then
+        log_action_begin_msg "Stopping $NAME"
+	start-stop-daemon --stop --quiet --oknodo --retry 15 --exec $FRONIUSD
+        RETVAL=$?
+        log_action_end_msg $RETVAL
+    else
+        log_success_msg "$NAME not running"
+        RETVAL=0
+    fi
+    ;;
+
+    restart|force-reload)
+    $0 stop && $0 start
+    RETVAL=$?
+    ;;
+
+    status)
+    pidof $FRONIUSD > /dev/null
+    RETVAL=$?
+    ;;
+
+    *)
+    echo "Usage: fronius {start|stop|restart|force-reload|status}"
+    RETVAL=2
+    ;;
+esac
+
+exit $RETVAL
+

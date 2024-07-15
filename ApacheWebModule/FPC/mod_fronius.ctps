@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="mod_fronius.ppr"/>
+        <FRMtype Value="0"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3"/>
+        <CursorPos X="6" Y="12"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="froniusDataMod.pas"/>
+        <FRMtype Value="300"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="wmFronius"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="3" Y="9"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.FidoDBData.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="11"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="11"/>
+        <CursorPos X="24" Y="25"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.Globals.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="63"/>
+        <CursorPos X="84" Y="73"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.ModuleInit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="15"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="93"/>
+        <CursorPos X="11" Y="122"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.Sessions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="8"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="91"/>
+        <CursorPos X="27" Y="106"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.Webauthn.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="12"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="57"/>
+        <CursorPos X="27" Y="72"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.WebAuthnModuleInit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="9"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="258"/>
+        <CursorPos X="48" Y="239"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.WebDataHandler.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="17"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="158"/>
+        <CursorPos X="56" Y="171"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\authData.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="16"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="223"/>
+        <CursorPos X="36" Y="240"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\cbor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="248"/>
+        <CursorPos Y="269"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\Fido2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2350"/>
+        <CursorPos X="16" Y="2364"/>
+        <UsageCount Value="609"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\Fido2dll.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="40"/>
+        <CursorPos X="29" Y="28"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\OpenSSL1_1ForWebauthn.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="609"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\superobject.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="10"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="712"/>
+        <CursorPos X="4" Y="727"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="14"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="353"/>
+        <CursorPos X="28" Y="368"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\extLibs\cryptRandom.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="27" Y="6"/>
+        <UsageCount Value="609"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Fronius.ActionsBase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="18"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="38" Y="8"/>
+        <UsageCount Value="590"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="custapache24.pp"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="13"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="154"/>
+        <CursorPos X="21" Y="161"/>
+        <UsageCount Value="586"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Src\Fronius.Consts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="575"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Src\Fronius.DBIntf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="72" Y="24"/>
+        <UsageCount Value="575"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\..\usr\local\codetyphon\typhon\components\BaseUtils\LazLoggerImpl.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="624"/>
+        <CursorPos X="3" Y="641"/>
+        <UsageCount Value="287"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\extLibs\cbor.pas"/>
+        <Caret Line="263" Column="12" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="566" Column="17" TopLine="549"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\cbor.pas"/>
+        <Caret Line="263" Column="12" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="169" Column="6" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="568" Column="37" TopLine="550"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\cbor.pas"/>
+        <Caret Line="263" Column="12" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="169" Column="6" TopLine="154"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\cbor.pas"/>
+        <Caret Line="269" Column="15" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.Webauthn.pas"/>
+        <Caret Line="215" Column="27" TopLine="195"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <Caret Line="692" Column="30" TopLine="623"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.Globals.pas"/>
+        <Caret Line="73" Column="84" TopLine="63"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.Sessions.pas"/>
+        <Caret Line="243" Column="55" TopLine="230"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.Sessions.pas"/>
+        <Caret Line="106" Column="27" TopLine="91"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.ModuleInit.pas"/>
+        <Caret Line="122" Column="11" TopLine="93"/>
+      </Position>
+      <Position>
+        <Filename Value="mod_fronius.ppr"/>
+        <Caret Line="31" Column="122" TopLine="12"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <Caret Line="250" Column="21" TopLine="235"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.ActionsBase.pas"/>
+        <Caret Line="8" Column="38"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\superobject.pas"/>
+        <Caret Line="751" Column="3" TopLine="736"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\superobject.pas"/>
+        <Caret Line="727" Column="4" TopLine="712"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\authData.pas"/>
+        <Caret Line="240" Column="36" TopLine="223"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <Caret Line="250" Column="21" TopLine="235"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <Caret Line="357" Column="22" TopLine="342"/>
+      </Position>
+      <Position>
+        <Filename Value="..\extLibs\WebauthnHandler.pas"/>
+        <Caret Line="368" Column="28" TopLine="353"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.ActionsBase.pas"/>
+        <Caret Line="8" Column="38"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Fronius.FidoDBData.pas"/>
+        <Caret Line="25" Column="24" TopLine="11"/>
+      </Position>
+      <Position>
+        <Filename Value="mod_fronius.ppr"/>
+        <Caret Line="12" Column="87" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="170" Column="53" TopLine="167"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="821" TopLine="792"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="344" TopLine="329"/>
+      </Position>
+      <Position>
+        <Filename Value="custapache24.pp"/>
+        <Caret Line="509" TopLine="500"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default">
+        <Mode Name="default">
+          <local>
+            <HostApplicationFilename Value="F:\ApacheServer\bin\httpd.exe"/>
+            <CommandLineParams Value="-X"/>
+          </local>
+        </Mode>
+      </Modes>
+    </RunParams>
+    <HistoryLists>
+      <List Name="LaunchingApplication" Type="File" Count="4">
+        <Item1 Value="C:\Windows\System32\cmd.exe /C ${TargetCmdLine}"/>
+        <Item2 Value="${CmdExe} ${TargetCmdLine}"/>
+        <Item3 Value="&quot;$(Pas2JSBrowser)&quot; &quot;$(Pas2JSProjectURL)&quot;"/>
+        <Item4 Value="$(Pas2JSBrowser) &quot;$(Pas2JSProjectURL)&quot;"/>
+      </List>
+      <List Name="CommandLineParameters" Count="1">
+        <Item1 Value="-X"/>
+      </List>
+    </HistoryLists>
+  </ProjectSession>
+</CONFIG>

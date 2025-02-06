@@ -8,8 +8,8 @@ interface
 
 uses
   SysUtils, Classes, Controls, Forms,
-  {$IFDEF FPC} fpjson, {$ELSE} System.JSON, {$ENDIF}
-  Fronius.EnergyEstimate, Fronius.DBIntf, Fronius.DB, ExtCtrls, StdCtrls, Vcl.Mask;
+  {$IFDEF FPC} fpjson, {$ELSE} System.JSON, VCL.Mask, {$ENDIF}
+  Fronius.EnergyEstimate, Fronius.DBIntf, Fronius.DB, ExtCtrls, StdCtrls;
 
 type
 
@@ -43,7 +43,7 @@ type
     procedure ClearEstimateThread;
     procedure OnEnergyUpdate(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample);
     procedure OnMeterSample(Sender : TObject; const meter : TMeterRealTimeData; const inverterData : TInverterRealTimeData);
-    procedure OnEnergyError(Sender : TObject; tick : integer; const msg : string);
+    procedure OnEnergyError(Sender : TObject; tick : int64; const msg : string);
     procedure OnLog( Sender : TObject; level : integer; const msg : string);
   public
     { Public-Deklarationen }
@@ -180,7 +180,7 @@ begin
         FreeAndNil(fDataMod);
 end;
 
-procedure TfrmFroniusAPI.OnEnergyError(Sender: TObject; tick: integer;
+procedure TfrmFroniusAPI.OnEnergyError(Sender: TObject; tick: int64;
   const msg: string);
 begin
      if Assigned(fDataMod) then

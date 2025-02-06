@@ -28,7 +28,7 @@ var
   dmFroniusDBCreate: TdmFroniusDBCreate;
 
 
-procedure CreateDB(location, dbUser, dbPwd, dbSQL : string);
+procedure CreateDB(location, dbUser, dbPwd, dbSQL, fbClientLib : string);
 
 implementation
 
@@ -36,12 +36,13 @@ implementation
 
 {$R *.frm}
 
-procedure CreateDB(location, dbUser, dbPwd, dbSQL : string);
+procedure CreateDB(location, dbUser, dbPwd, dbSQL, fbClientLib : string);
 var script : TStringList;
 begin
      dmFroniusDBCreate.dbFronius.DatabaseName := location;
      dmFroniusDBCreate.dbFronius.Params.Add('user_name=' + dbUser);
      dmFroniusDBCreate.dbFronius.Params.Add('password=' + dbPwd);
+     dmFroniusDBCreate.dbFronius.FirebirdLibraryPathName := fbClientLib;
 
      // Create the database
      //dmFroniusDBCreate.scFronius.NoPreconnect := True;

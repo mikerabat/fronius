@@ -34,7 +34,7 @@ var aHost, aPortSN : string;
        if idx <= 2 then
           exit;
 
-       aHost := Copy(froniusConf.DBName, 1, idx);
+       aHost := Copy(froniusConf.DBName, 1, idx - 1);
        idx := Pos('/', aHost);
 
        if idx <= 0 then
@@ -69,13 +69,11 @@ begin
                 idFirebirdTest.Disconnect;
            end
            else
-               {$IFDEF WINDOWS} OutputDebugString(PChar('Failed to convert port: ' + aHost + ':' + aPortSN));
-               {$ELSE} Writeln('Failed to convert port: ' + aHost + ':' + aPortSN); {$ENDIF}
+               FidoServer.Log(9, 'Failed to convert port: ' + aHost + ':' + aPortSN);
         except
               on E: Exception do
               begin
-                   {$IFDEF WINDOWS} OutputDebugString( PChar( 'Failed to connect to ' + aHost + ':' + aPortSN)); {$ELSE}
-                   Writeln('Failed to connect to ' + aHost + ':' + aPortSN); {$ENDIF}
+                   FidoServer.Log(9, 'Failed to convert port: ' + aHost + ':' + aPortSN);
                    Result := False;
               end;
         end;
@@ -109,7 +107,6 @@ begin
 
      Result := loc_froniusConf;
 end;
-
 
 initialization
   locCS := TCriticalSection.Create;

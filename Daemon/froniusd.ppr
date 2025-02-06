@@ -8,16 +8,15 @@ uses
   Fronius.Data,
   Fronius.DB,
   Fronius.EnergyEstimate,
-  Fronius.Linux.DB,
+  Fronius.Linux.DB, Fronius.DBIntf,
   Fronius.Linux.Log;
 
 
 
 var engEstThr : TFroniusEnergyEstThr;
-    dbAdapt : IFroninusDBAdapter;
+    dbAdapt : IFroniusDBAdapter;
     DataMod : TFroniusDB;
     log : TFroniusLogFile;
-    pidFile : string;
 
 // from daemonapp.inc
 procedure DaemonizeProgram;

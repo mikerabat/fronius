@@ -1,0 +1,19 @@
+#! /bin/bash
+
+# executes the necessary commands to create a self signed certificate in the
+# standard folders that are used in the configuration process
+# adjust the paths as needed
+# note: the key file is not password protected!
+
+SSLCERT=/etc/ssl/certs/fronius.crt
+SSLKEY=/etc/ssl/private/fronius.key
+
+# standard properties
+CC=AT
+STATE=Austria
+CITY=Graz
+COMPANY=mrsoft
+SECTION=me
+HTTPHOST=fronius.mrsoft.org
+
+openssl req -x509 -newkey rsa:4096 -keyout $SSLKEY -out $SSLCERT -sha256 -days 365 -nodes -subj "/C=$CC/ST=$STATE/L=$CITY/O=$COMPANY/OU=$SECTION/CN=$HTTPHOST"

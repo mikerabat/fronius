@@ -25,7 +25,7 @@ unit WebauthnHandler;
 
 interface
 
-uses SysUtils, Fido2, SuperObject, cbor, authData, cryptRandom;
+uses SysUtils, Fido2, SuperObject, cbor, authData, cryptRandom, Fronius.Consts;
 
 
 type
@@ -69,8 +69,12 @@ type
 // ###########################################
 // #### Base properties required by the server
   TFidoAttestationType = (atDirect, atNone, atIndirect);
+
+  { TFidoServer }
+
   TFidoServer = class(TObject)
   private
+    fOnLog: TLogEvent;
     fRelID: string;
     fTimeOut: integer;
     fRelParty: string;
@@ -82,6 +86,7 @@ type
     property RelyingParty : string read fRelParty write fRelParty;
     property RelyingPartyId : string read fRelID write fRelId;
     property AttestType : TFidoAttestationType read fAttestationType write fAttestationType;
+    property OnLog : TLogEvent read fOnLog write fOnLog;
 
     // Although we want direct attestation the client can downgrad. e.g. we want direct but
     // webauthn over a third party e.g. PC -> passkey on an Iphone. Returns none
@@ -94,6 +99,8 @@ type
     function RPIDHash : TFidoSHA256Hash;
 
     function ToJSON : ISuperObject;
+
+    procedure Log( level : integer; msg : string );
 
     constructor Create;
   end;
@@ -241,6 +248,12 @@ begin
      fResidentKey := True;
 
      fTimeOut := 60000;
+end;
+
+procedure TFidoServer.Log(level: integer; msg: string);
+begin
+     if Assigned(fOnLog) then
+        fOnLog( self, level, msg );
 end;
 
 function TFidoServer.RPIDHash: TFidoSHA256Hash;
@@ -555,6 +568,7 @@ begin
              userHandle := credential.S['response.userHandle'];
              if userHandle = '' then
                 userHandle := startData.S['publicKey.user.id'];
+             FidoServer.Log(9, 'Before save credentials');
              Result := FidoDataHandler.SaveCred(fmt, credentialID, userHandle, ClientData.S['challenge'], nil, authDataObj);
           finally
                  authDataObj.Free;
@@ -562,6 +576,7 @@ begin
      end
      else if fmt = 'packed' then
      begin
+          FidoServer.Log(9, 'In packed trree');
           // check if anyhing is in place
           if not (( alg = COSE_ES256 ) or (alg = COSE_EDDSA) or (alg = COSE_RS256)) then
              raise Exception.Create('Unknown algorithm');
@@ -631,10 +646,11 @@ begin
                      credentialId := credential.S['rawId'];
 
                      // ###########################################
-                     // #### save EVERYTHING to a database
+                     // #### save EVERYTHING to the database
                      userHandle := credential.S['response.userHandle'];
                      if userHandle = '' then
                         userHandle := startData.S['publicKey.user.id'];
+                     FidoServer.Log(9, 'save cred in packed tree');
                      FidoDataHandler.SaveCred(fmt, credentialId, userHandle, ClientData.S['challenge'], credVerify, authDataObj);
                 end;
              finally
@@ -650,6 +666,7 @@ begin
           exit;
      end;
 
+     FidoServer.Log(9, 'done');
      // build result and generate a session
      if Result
      then
@@ -659,8 +676,12 @@ begin
          jsonRes := '{"verified":false}';
 
      // cleanup challenge if verification succeeded
+     if ClientData = nil then
+        FidoServer.Log(9, 'error no client data object assigend' );
      if Result then
         FidoDataHandler.CleanupPendingChallenges(ClientData.S['challenge']);
+
+     FidoServer.Log(9, 'verifyandsavecred finished');
 end;
 
 { TFidoUserAssert }
@@ -746,7 +767,7 @@ begin
      if userHandle <> '' then
         Result := FidoDataHandler.IsAlreadRegistered(userHandle, credId);
 
-     Writeln('CheckCredentials: ' + Result.ToString(True) );
+     FidoServer.Log(0, 'CheckCredentials: ' + Result.ToString(True) );
      if not Result then
      begin
           cred := origChallenge.A['publicKey.allowCredentials'];
@@ -795,7 +816,7 @@ begin
      except
            on E : Exception do
            begin
-                Writeln('Failed to parse assert: ' + assertionStr );
+                FidoServer.Log(0, 'Failed to parse assert: ' + assertionStr );
                 raise;
            end;
      end;
@@ -812,14 +833,14 @@ begin
      except
            on E : Exception do
            begin
-                Writeln('Failed to parse clientDataStr: ' + String(clientDataStr) );
+                FidoServer.Log(0, 'Failed to parse clientDataStr: ' + String(clientDataStr) );
                 raise;
            end;
      end;
      if clientData = nil then
         exit;
 
-     writeln('clientdatastr: ' + clientdatastr);
+     FidoServer.Log(0, 'clientdatastr: ' + clientdatastr);
      if clientData.S['type'] <> 'webauthn.get' then
         exit;
 
@@ -858,7 +879,7 @@ begin
           exit;
      end;
 
-     writeln('Before authdata');
+     FidoServer.Log(0, 'Before authdata');
      authDataObj := TAuthData.Create( authData );
      try
         if not CheckCredentials( userHandle, origChallenge, selCredId ) then
@@ -867,14 +888,14 @@ begin
              exit;
         end;
 
-        writeln('Check credid');
+        FidoServer.Log(0, 'Check credid');
         if selCredId <> credID then
         begin
              resStr := '{"error":2,"msg":"Credentials not in user list"}';
              exit;
         end;
 
-        writeln('cred to user');
+        FidoServer.Log(0, 'cred to user');
         // check user id attached to credential id
         if not FidoDataHandler.CredToUser( credId, uname ) then
         begin
@@ -883,22 +904,22 @@ begin
         end;
 
         // todo: maybe it's a good idea to check the guid (got from direct attestation)
-        writeln('user present');
+        FidoServer.Log(0, 'user present');
         if not authDataObj.UserPresent then
         begin
              resStr := '{"error":3,"msg":"Error: parameter user present not set"}';
              exit;
         end;
 
-        writeln('Check user verified');
+        FidoServer.Log(0, 'Check user verified');
         if authDataObj.UserVerified <> FidoServer.UserVerification then
         begin
-             Writeln('user verification failed: ' + BoolToStr( authDataobj.UserVerified, True) + ' ' + BoolToStr( FidoServer.UserVerification, True ));
+             FidoServer.Log(0, 'user verification failed: ' + BoolToStr( authDataobj.UserVerified, True) + ' ' + BoolToStr( FidoServer.UserVerification, True ));
              resStr := '{"error":4,"msg":"Error: parameter user verification not set to the default"}';
              exit;
         end;
 
-        writeln('Before hashing');
+        FidoServer.Log(0, 'Before hashing');
         // check rp hash
         rpIDHash := authDataObj.rpIDHash;
         serverRPIDHash := FidoServer.RPIDHash;
@@ -908,7 +929,7 @@ begin
              exit;
         end;
 
-        writeln('Check challange');
+        FidoServer.Log(0, 'Check challange');
         credFmt := fmFido2;
         buf := Base64URLDecodeToBytes( clientData.S['challenge'] );
 
@@ -921,7 +942,7 @@ begin
 
         // ###########################################
         // #### check assertion according to initial attestation format
-        writeln('get credential');
+        FidoServer.Log(0, 'get credential');
         fmt := FidoDataHandler.CredentialDataFromId(credId, credData);
 
         if credData = '' then
@@ -935,7 +956,7 @@ begin
              // ###########################################
              // #### none attestation - check the signature...
 
-             writeln('In none');
+             FidoServer.Log(0, 'In none');
              // from https://medium.com/webauthnworks/verifying-fido2-packed-attestation-a067a9b2facd
              // 1: concat authData with clientdatahash  -> signature base
              SetLength(sigBase, Length(clientDataHash) + Length(authData));
@@ -945,7 +966,7 @@ begin
              // 2: according to the stored public key verify the given signature
              regAuthData := TAuthData.Create( Base64UrlDecodeToBytes(credData) );
 
-             writeln('check public key');
+             FidoServer.Log(0, 'check public key');
              if not regAuthData.HasPublicKey then
              begin
                   resStr := '{"error":7,"msg":"No public key - surragate attestation not allowed."}';
@@ -953,7 +974,7 @@ begin
              end;
 
              try
-                writeln('Check keytype');
+                FidoServer.Log(0, 'Check keytype');
                 try
                    case regAuthData.KeyType of
                      COSE_KTY_OKP: verified := VerifyOKP( sig, sigBase, regAuthData );
@@ -971,7 +992,7 @@ begin
                       end;
 
                 end;
-                writeln('End auth data verification');
+                FidoServer.Log(0, 'End auth data verification');
              finally
                     regAuthData.Free;
              end;

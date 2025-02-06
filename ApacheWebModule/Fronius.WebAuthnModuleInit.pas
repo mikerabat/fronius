@@ -37,7 +37,7 @@ type
 
 implementation
 
-uses {$IFDEF FPC} httpprotocol, custapache24, {$ENDIF}
+uses {$IFDEF FPC} httpprotocol, (*custapache24,*) {$ENDIF}
      Fronius.Sessions, Fronius.Globals, WebauthnHandler;
 
 { TWebAuthnHandler }

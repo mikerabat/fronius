@@ -84,6 +84,7 @@ function TFroniusWebauthHandler.EnrollVeriy(remoteAddr : string; requestContent:
   uname: string): boolean;
 var errCode : integer;
     err : ISuperObject;
+    userRegVerify : TFidoUserRegisterVerify;
 begin
      // ###########################################
      // #### Enrollment is only allowed in the local area network...
@@ -102,12 +103,12 @@ begin
      try
         // ###########################################
         // #### Run the verification process on the content data
-        with TFidoUserRegisterVerify.Create do
+        userRegVerify := TFidoUserRegisterVerify.Create;
         try
-           SetHandler(fFidoDataHandler);
-           Result := VerifyAndSaveCred( requestContent, jsonRes, uname )
+           userRegVerify.SetHandler(fFidoDataHandler);
+           Result := userRegVerify.VerifyAndSaveCred( requestContent, jsonRes, uname );
         finally
-               Free;
+               userRegVerify.Free;
         end;
      except
            on E : Exception do
@@ -124,9 +125,9 @@ end;
 function TFroniusWebauthHandler.IsLocalIPAddress(remoteAddr: string; var errCode : integer): boolean;
 var ipAddr : DWORD;
     sl : TStringList;
-const cLocalHost = $7F000001; // 127.0.0.1
-      cIPNet = $C0A80000;     // 192.168.0.0
-      cIPNetMask = $FFFF0000;
+const cLocalHost : LongWord = $7F000001; // 127.0.0.1
+      cIPNet : LongWord = $C0A80000;     // 192.168.0.0
+      cIPNetMask : LongWord = $FFFF0000;
 begin
      errCode := 0;
      Result := False;
@@ -145,7 +146,10 @@ begin
         end;
 
         try
-           ipAddr := StrToInt(sl[0]) shl 24 + StrToInt(sl[1]) shl 16 + StrToInt(sl[2]) shl 8 + strToInt(sl[3]);
+           ipAddr := LongWord(StrToInt(sl[0])) shl 24 +
+                     LongWord(StrToInt(sl[1])) shl 16 +
+                     LongWord(StrToInt(sl[2])) shl 8 +
+                     LongWord(strToInt(sl[3]));
 
            // either localhost or lan segment
            Result := (ipAddr = cLocalHost) or ( (ipAddr and cIPNetMask) = cIPNet);

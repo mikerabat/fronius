@@ -276,7 +276,7 @@ begin
      Clear;
 
      fDB.SetSQLText('Select * from FroniusSessions, FroniusUsers where FroniusSessions.uid=FroniusUsers.uid');
-     fDB.ExecQuery;;
+     fDB.ExecQuery;
 
      // ###########################################
      // #### Read the stored sessions from the db

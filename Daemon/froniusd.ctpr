@@ -60,12 +60,18 @@
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <FRMtype Value="200"/>
+        <FRMtype Value="300"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="dmFronius"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
       </Unit>
       <Unit>
         <Filename Value="Fronius.Linux.Log.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../Src/Fronius.DBIntf.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -80,6 +86,15 @@
       <OtherUnitFiles Value="../Src;/usr/local/codetyphon/typhon/components/packages_pl/pl_Indy/source/"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <CodeGeneration>
+      <SmallerCode Value="True"/>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="False"/>
+        <RunWithoutDebug Value="True"/>
+      </Debugging>
+    </Linking>
   </CompilerOptions>
   <Debugging>
     <Exceptions>

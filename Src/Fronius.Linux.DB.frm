@@ -1,8 +1,8 @@
 object dmFronius: TdmFronius
   OldCreateOrder = False
   Height = 309
-  HorizontalOffset = 99
-  VerticalOffset = 99
+  HorizontalOffset = 86
+  VerticalOffset = 86
   Width = 369
   object FroniusDB: TIBDatabase
     Connected = False

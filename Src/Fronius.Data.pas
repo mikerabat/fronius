@@ -334,7 +334,7 @@ type
 
 implementation
 
-uses DateUtils, Windows, Math {$IFDEF FPC}, jsonparser{$ENDIF};
+uses DateUtils, Math {$IFDEF FPC}, jsonparser{$ENDIF};
 
 { TFroniusBase }
 
@@ -620,12 +620,13 @@ end;
 
 function TFroniusInverterInfo.ToString: string;
 var heaText : string;
-  i: Integer;
+    i : Integer;
 begin
      heaText := inherited ToString;
+     Result := '';
 
      for i := 0 to Length(fInverters) - 1 do
-         Result := Result + fInverters[i].ToString + #13#10;
+         Result := Result + fInverters[i].ToString + slineBreak;
 
      Result := Result + heaText;
 end;
@@ -1111,12 +1112,7 @@ end;
 
 function TFroniusPowerFlowRealTimeData.ReadFroniusSite(
   site: TJSONValue): TFroniusSiteRealTimeData;
-var s : string;
 begin
-     s := site.ToJSON;
-
-     outputdebugstring(PChar(s));
-
      Result := TFroniusSiteRealTimeData.Create;
      Result.fBackupMode :=  JsonGetBool(site, 'BackupMode');
      //Result.fBatteryStandby := JsonGetBool(site, 'BatteryStandby');

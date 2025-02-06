@@ -11,11 +11,13 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="53"/>
-        <CursorPos X="82" Y="73"/>
-        <UsageCount Value="161"/>
+        <TopLine Value="162"/>
+        <CursorPos X="101" Y="178"/>
+        <UsageCount Value="287"/>
+        <Bookmarks Count="1">
+          <Item0 X="61" Y="60" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="Fronius.Linux.DBCreate.frm"/>
@@ -24,7 +26,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="0"/>
         <CursorPos X="14" Y="3"/>
-        <UsageCount Value="179"/>
+        <UsageCount Value="305"/>
         <DefaultSyntaxHighlighter Value="FRM"/>
       </Unit>
       <Unit>
@@ -34,186 +36,254 @@
         <ComponentName Value="dmFroniusDBCreate"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="30"/>
-        <CursorPos Y="46"/>
-        <UsageCount Value="179"/>
+        <TopLine Value="33"/>
+        <CursorPos X="13" Y="63"/>
+        <UsageCount Value="305"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.Consts.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <CursorPos Y="23"/>
-        <UsageCount Value="162"/>
+        <TopLine Value="259"/>
+        <CursorPos X="6" Y="257"/>
+        <UsageCount Value="288"/>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
-        <Filename Value="CreatedFroniusDB.dpr"/>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/runtime/IBDatabase.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <CursorPos X="50"/>
-        <UsageCount Value="24"/>
-        <Bookmarks Count="1">
-          <Item0 X="14" Y="92" ID="1"/>
-        </Bookmarks>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
+        <TopLine Value="1341"/>
+        <CursorPos X="33" Y="1360"/>
+        <UsageCount Value="117"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="Fronius.Win.DBCreate.pas"/>
-        <HasResources Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <CursorPos X="128" Y="7"/>
-        <UsageCount Value="4"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit>
-      <Unit>
-        <Filename Value="Fronius.Linux.DBCreate.dfm"/>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/IB.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="4"/>
-        <DefaultSyntaxHighlighter Value="FRM"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="61"/>
+        <CursorPos X="17" Y="69"/>
+        <UsageCount Value="117"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/runtime/ibxscript.pas"/>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/3_0/FB30ClientAPI.pas"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="251"/>
-        <CursorPos X="3" Y="269"/>
-        <UsageCount Value="4"/>
+        <TopLine Value="378"/>
+        <CursorPos X="46" Y="413"/>
+        <UsageCount Value="117"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/FBClientAPI.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="12"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="591"/>
+        <CursorPos Y="611"/>
+        <UsageCount Value="117"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/uloadlibrary.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="13"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="53"/>
+        <CursorPos Y="69"/>
+        <UsageCount Value="117"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/3_0/Firebird.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3745"/>
+        <CursorPos Y="3771"/>
+        <UsageCount Value="116"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/FBMessages.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="11"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="385"/>
+        <CursorPos Y="411"/>
+        <UsageCount Value="116"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/inc/dynlibs.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="8"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="62"/>
+        <CursorPos X="5" Y="81"/>
+        <UsageCount Value="116"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/linux/system.pp"/>
+        <FRMtype Value="0"/>
+        <UnitName Value="System"/>
+        <EditorIndex Value="10"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="41"/>
+        <CursorPos X="25" Y="56"/>
+        <UsageCount Value="116"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/inc/dynlibh.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="9"/>
+        <WindowIndex Value="0"/>
+        <UsageCount Value="116"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../ApacheWebModule/extLibs/WebauthnHandler.pas"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="876"/>
+        <CursorPos X="9" Y="891"/>
+        <UsageCount Value="87"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="51" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="53" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="52" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="53" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="50" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="54" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="42" Column="103" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="54" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="42" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="54" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="55" Column="45" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="58" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="59" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="37" Column="99" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="42" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="54" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="57" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="58" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="59" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="60" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="Fronius.Linux.DBCreate.pas"/>
-        <Caret Line="62" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="29" TopLine="4"/>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="57" Column="29" TopLine="40"/>
       </Position>
       <Position>
         <Filename Value="CreateFroniusDB.dpr"/>
-        <Caret Line="90" TopLine="65"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="31" Column="14" TopLine="13"/>
+        <Caret Line="67" Column="25" TopLine="40"/>
       </Position>
       <Position>
         <Filename Value="CreateFroniusDB.dpr"/>
-        <Caret Line="97" Column="41" TopLine="65"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="31" Column="11" TopLine="13"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="197" Column="6" TopLine="180"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="110" Column="56" TopLine="72"/>
-      </Position>
-      <Position>
-        <Filename Value="../Src/Fronius.Consts.pas"/>
-        <Caret Line="31" Column="75" TopLine="12"/>
+        <Caret Line="49" Column="17" TopLine="40"/>
       </Position>
       <Position>
         <Filename Value="CreateFroniusDB.dpr"/>
-        <Caret Line="89" Column="64" TopLine="69"/>
+        <Caret Line="63" Column="57" TopLine="42"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="128" Column="29" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="132" Column="17" TopLine="118"/>
+      </Position>
+      <Position>
+        <Filename Value="../ApacheWebModule/extLibs/WebauthnHandler.pas"/>
+        <Caret Line="891" Column="9" TopLine="876"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="131" Column="55" TopLine="118"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="22" Column="21" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="136" Column="64" TopLine="112"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="22" Column="21" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="137" Column="55" TopLine="112"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="160" Column="85" TopLine="138"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="113" Column="57" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="160" TopLine="146"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="168" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="177" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="184" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="186" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="60" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="61" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="62" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="64" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="80" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="82" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="84" TopLine="61"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="187" TopLine="165"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="186" Column="21" TopLine="165"/>
+      </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="163" Column="30" TopLine="153"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="56" Column="13" TopLine="56"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -221,7 +291,7 @@
       <Modes ActiveMode="default">
         <Mode Name="default">
           <local>
-            <CommandLineParams Value="-db /home/rabatscher/Documents/Fronius/DB/fronius.fdb -sql /home/rabatscher/Documents/Fronius/DB/froniusdb.sql"/>
+            <CommandLineParams Value="-createApacheConf -apacheCfgIn /home/pi/fronius/scripts/fronius.conf.tpl -apacheCfgOut frn.cfg -httphost fronius.mrsoft.org -sslcert test.crt -sslkey test.key -email m.rabatscher@gmail.com"/>
           </local>
         </Mode>
       </Modes>
@@ -234,11 +304,36 @@
         <Item4 Value="$(Pas2JSBrowser) &quot;$(Pas2JSProjectURL)&quot;"/>
         <Item5 Value="/usr/bin/gnome-terminal -t &apos;Typhon Run Output&apos; -e &apos;$(TargetCmdLine)&apos;"/>
       </List>
-      <List Name="CommandLineParameters" Count="3">
-        <Item1 Value="-db /home/rabatscher/Documents/Fronius/DB/fronius.fdb -sql /home/rabatscher/Documents/Fronius/DB/froniusdb.sql"/>
-        <Item2 Value="-db /home/rabatscher/Documents/Fronius/fronius.fdb -sql /home/rabatscher/Documents/Fronius/froniusdb.sql"/>
-        <Item3 Value="-db fronius.fdb"/>
+      <List Name="CommandLineParameters" Count="9">
+        <Item1 Value="-createApacheConf -apacheCfgIn /home/pi/fronius/scripts/fronius.conf.tpl -apacheCfgOut frn.cfg -httphost fronius.mrsoft.org -sslcert test.crt -sslkey test.key -email m.rabatscher@gmail.com"/>
+        <Item2 Value="-db 127.0.0.1:/var/lib/fronius/fronius.fdb -sql ../scripts/froniusdb.sql -fbclient libfbclient.so.2"/>
+        <Item3 Value="-db 127.0.0.1:/home/pi/fronius/fronius.fdb -sql ../scripts/froniusdb.sql -fbclient libfbclient.so.2"/>
+        <Item4 Value="-db ../fronius.fdb -sql ../scripts/froniusdb.sql -fbclient libfbclient.so.2"/>
+        <Item5 Value="-db ../fronius.fdb -sql ../scripts/froniusdb.sql"/>
+        <Item6 Value="-db ../DB/fronius.fdb -sql ../DB/froniusdb.sql"/>
+        <Item7 Value="-db /home/rabatscher/Documents/Fronius/DB/fronius.fdb -sql /home/rabatscher/Documents/Fronius/DB/froniusdb.sql"/>
+        <Item8 Value="-db /home/rabatscher/Documents/Fronius/fronius.fdb -sql /home/rabatscher/Documents/Fronius/froniusdb.sql"/>
+        <Item9 Value="-db fronius.fdb"/>
       </List>
+      <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/3_0/FB30ClientAPI.pas"/>
+        <Line Value="413"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="CreateFroniusDB.dpr"/>
+        <Line Value="159"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>

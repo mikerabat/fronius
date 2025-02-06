@@ -5,13 +5,11 @@ unit Fronius.Linux.DB;
 interface
 
 uses
-  Classes, SysUtils, IBDatabase, IBSQL, IdTCPClient, Fronius.DB;
+  Classes, SysUtils, IBDatabase, IBSQL, IdTCPClient, Fronius.DBIntf, Fronius.Consts;
 
 type
-
   { TdmFronius }
-
-  TdmFronius = class(TDataModule, IFroninusDBAdapter)
+  TdmFronius = class(TDataModule, IFroniusDBAdapter)
     FroniusDB: TIBDatabase;
     idFirebirdTest: TIdTCPClient;
     sqlSample: TIBSQL;
@@ -32,12 +30,14 @@ type
     function GetResDT( field : string; defValue : TDateTime ) : TDateTime; overload;
     function GetRes( field : string; defVAlue : string) : string; overload;
     function GetRes( field : string; defValue : double) : double; overload;
+    function GetRes( field : String; defValue : integer) : integer; overload;
 
     function Eof : boolean;
     procedure Next;
 
     procedure ExecQuery;
     procedure Commit;
+    procedure Rollback;
     procedure Close;
 
     function TickCnt : int64;
@@ -54,7 +54,7 @@ var dmFronius: TdmFronius;
 
 implementation
 
-uses Fronius.Consts, LCLIntf, LCLType;
+uses LCLIntf, LCLType;
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
@@ -93,6 +93,7 @@ begin
         else
             // Get Database-Location from registry (Local machine)
             FroniusDB.DatabaseName := fronConf.DBName;
+        FroniusDB.FirebirdLibraryPathName := fronConf.FirebirdLibraryPathName;
 
         LLog(8, 'Connecting to db ' + FroniusDB.DatabaseName);
         LLog(8, 'Testing firebird server avail...' );
@@ -133,7 +134,7 @@ begin
      sqlSample.ParamByName(param).AsInteger := val;
 end;
 
-procedure TdmFronius.SetParam(param, val: string);
+procedure TdmFronius.SetParam(param: string; val: string);
 begin
      sqlSample.ParamByName(param).AsString := val;
 end;
@@ -170,6 +171,18 @@ begin
          Result := defValue;
 end;
 
+function TdmFronius.GetRes(field: String; defValue: integer): integer;
+var idx : integer;
+begin
+     idx := sqlSample.FieldIndex[field];
+
+     if (idx >= 0) and not sqlSample.Fields[idx].IsNull
+     then
+         Result := sqlSample.Fields[idx].AsInteger
+     else
+         Result := defValue;
+end;
+
 function TdmFronius.GetResDT(field: string; defValue: TDateTime): TDateTime;
 var idx : integer;
 begin
@@ -182,7 +195,7 @@ begin
          Result := defValue;
 end;
 
-function TdmFronius.GetRes(field, defVAlue: string): string;
+function TdmFronius.GetRes(field: string; defVAlue: string): string;
 var idx : integer;
 begin
      idx := sqlSample.FieldIndex[field];
@@ -192,6 +205,11 @@ begin
          Result := sqlSample.Fields[idx].AsString
      else
          Result := defValue;
+end;
+
+procedure TdmFronius.Rollback;
+begin
+     trFronius.Rollback;
 end;
 
 
@@ -235,7 +253,7 @@ var aHost, aPortSN : string;
        if idx <= 2 then
           exit;
 
-       aHost := Copy(FroniusDB.DatabaseName, 1, idx);
+       aHost := Copy(FroniusDB.DatabaseName, 1, idx - 1);
        idx := Pos('/', aHost);
 
        if idx <= 0 then

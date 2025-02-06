@@ -52,7 +52,6 @@ type
   private
     fBuf : Array[0..cNumPreCalc-1] of byte;  // precalculated buffer
     fBufIdx : integer;
-    fs : TFileStream;
   public
     procedure Init(seed : LongWord);
     function Random : byte;
@@ -67,10 +66,22 @@ begin
 end;
 
 procedure TLinuxOSRndEngine.Init(seed : LongWord);
+var randomFIle : File of Byte;
 begin
      fBufIdx := 0;
-     if fs.Read( fBuf[0], sizeof(fBuf)) <> sizeof(fBuf) then
-        RaiseLastOSError;
+
+     cs.enter;
+     try
+        assignFile(randomFile, '/dev/urandom');
+        try
+           reset(randomFile);
+           blockRead(randomFile, fBuf[0], length(fBuf));
+        finally
+               closeFile(randomFile);
+        end;
+     finally
+            cs.Leave;
+     end;
 end;
 
 function TLinuxOSRndEngine.Random : byte;
@@ -86,14 +97,11 @@ constructor TLinuxOSRndEngine.Create;
 begin
      inherited Create;
 
-     fs := TFileStream.Create('/dev/urandom', fmOpenRead);
      fBufIdx := cNumPreCalc;
 end;
 
 destructor TLinuxOSRndEngine.Destroy;
 begin
-     fs.Free;
-
      inherited Destroy;
 end;
 

@@ -38,14 +38,23 @@ object wmFronius: TwmFronius
     Left = 136
     Top = 32
   end
-  object sqlSample: TIBSQL
+  object sqlSample: TIBQuery
+    AllowAutoActivateTransaction = False
     Database = FroniusDB
-    CaseSensitiveParameterNames = False
-    GenerateParamNames = False
-    UniqueParamNames = False
-    ParamCheck = True
-    Scrollable = False
     Transaction = trFronius
+    BufferChunks = 1000
+    BufferChunksInFirstBlock = 50
+    CachedUpdates = False
+    CaseSensitiveParameterNames = False
+    EnableStatistics = False
+    GenerateParamNames = False
+    GeneratorField.ApplyOnEvent = gaeOnNewRecord
+    MasterDetailDelay = 0
+    Params = <>
+    SQLFiltered = False
+    DataSetCloseAction = dcDiscardChanges
+    TZTextOption = tzOffset
+    DefaultTZDate = 43831
     Left = 40
     Top = 120
   end

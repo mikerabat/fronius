@@ -5,14 +5,15 @@ unit froniusDataMod;
 interface
 
 uses
-  SysUtils, Classes, IBDatabase, IBSQL, httpdefs, fpHTTP, fpWeb,
-  Fronius.DBIntf, Fronius.WebAuthnModuleInit, Fronius.WebDataHandler;
+  SysUtils, Classes, IBDatabase, IBQuery, httpdefs, fpHTTP, fpWeb,
+  Fronius.Consts, Fronius.DBIntf, Fronius.WebAuthnModuleInit,
+  Fronius.WebDataHandler, Fronius.Sessions;
 
 type
   { TwmFronius }
   TwmFronius = class(TFPWebModule, IFroniusDBAdapter)
     FroniusDB: TIBDatabase;
-    sqlSample: TIBSQL;
+    sqlSample: TIBQuery;
     trFronius: TIBTransaction;
     procedure DataModuleBeforeRequest(Sender: TObject; ARequest: TRequest);
     procedure DataModuleCreate(Sender: TObject);
@@ -60,7 +61,7 @@ var
 
 implementation
 
-uses Fronius.Globals;
+uses Fronius.Globals, db;
 
 {$R *.frm}
 
@@ -77,7 +78,11 @@ end;
 
 procedure TwmFronius.ExecQuery;
 begin
-     sqlSample.ExecQuery;
+     if Pos('select', LowerCase(sqlSample.SQL.Text)) = 1
+     then
+         sqlSample.Open
+     else
+         sqlSample.ExecSQL;
 end;
 
 function TwmFronius.IsConnected: boolean;
@@ -102,37 +107,37 @@ begin
 end;
 
 function TwmFronius.GetRes(field: string; defValue: double): double;
-var idx : integer;
+var aField : TField;
 begin
-     idx := sqlSample.FieldIndex[field];
+     aField := sqlSample.FieldByName(field);
 
-     if (idx >= 0) and not sqlSample.Fields[idx].IsNull
+     if (afield <> nil) and (not aField.IsNull)
      then
-         Result := sqlSample.Fields[idx].AsDouble
+         Result := aField.AsFloat
      else
          Result := defValue;
 end;
 
 function TwmFronius.GetResDT(field: string; defValue: TDateTime): TDateTime;
-var idx : integer;
+var aField : TField;
 begin
-     idx := sqlSample.FieldIndex[field];
+     afield := sqlSample.FieldByName(field);
 
-     if (idx >= 0) and not sqlSample.Fields[idx].IsNull
+     if (afield <> nil) and (not aField.IsNull)
      then
-         Result := sqlSample.Fields[idx].AsDateTime
+         Result := aField.AsDateTime
      else
          Result := defValue;
 end;
 
 function TwmFronius.GetRes(field: string; defValue: string): string;
-var idx : integer;
+var aField : TField;
 begin
-     idx := sqlSample.FieldIndex[field];
+     afield := sqlSample.FieldByName(field);
 
-     if (idx >= 0) and not sqlSample.Fields[idx].IsNull
+     if (afield <> nil) and (not aField.IsNull)
      then
-         Result := sqlSample.Fields[idx].AsString
+         Result := aField.AsString
      else
          Result := defValue;
 end;
@@ -159,7 +164,7 @@ end;
 
 procedure TwmFronius.SetParam(param: string; val: double);
 begin
-     sqlSample.ParamByName(param).AsDouble := val;
+     sqlSample.ParamByName(param).AsFloat := val;
 end;
 
 procedure TwmFronius.SetParam(param: string; val: integer);
@@ -180,6 +185,7 @@ begin
 
      // Get Database-Location from registry (Local machine)
      FroniusDB.DatabaseName := froniusConf.DBName;
+     FroniusDB.FirebirdLibraryPathName := froniusConf.FirebirdLibraryPathName;
 
      if firebirdConnected then
      begin
@@ -192,12 +198,16 @@ begin
      // create the complete webauthn and session cookie handler:
      fWebauthn := TWebAuthnPathHandler.Create(self, self);
      fDataHandler := TFroniusDataPathHandler.Create(self, self);
+
+     // this only works in cgi:
+     InitSessionList( self );
 end;
 
 procedure TwmFronius.DataModuleBeforeRequest(Sender: TObject; ARequest: TRequest
   );
 begin
-  Writeln('Request: ' + ARequest.PathInfo);
+     if Assigned(fLogEvt) then
+        fLogEvt(self, 0, aRequest.PathInfo);
 end;
 
 procedure TwmFronius.DataModuleDestroy(Sender: TObject);
@@ -234,13 +244,13 @@ begin
 end;
 
 function TwmFronius.GetRes(field: String; defValue: integer): integer;
-var idx : integer;
+var aField : TField;
 begin
-     idx := sqlSample.FieldIndex[field];
+     afield := sqlSample.FieldByName(field);
 
-     if (idx >= 0) and not sqlSample.Fields[idx].IsNull
+     if (afield <> nil) and (not aField.IsNull)
      then
-         Result := sqlSample.Fields[idx].AsInteger
+         Result := aField.AsInteger
      else
          Result := defValue;
 end;

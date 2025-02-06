@@ -6,7 +6,7 @@ unit Fronius.DB;
 
 interface
 
-uses SysUtils, Classes, Fronius.Consts, Fronius.EnergyEstimate, SyncObjs, Types,
+uses SysUtils, Classes, Fronius.Consts, Fronius.EnergyEstimate, SyncObjs,
      Fronius.DBIntf;
 
 
@@ -43,7 +43,7 @@ type
     function IsConnected : boolean;
 
     procedure OnEnergyUpdate(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample);
-    procedure OnEnergyError(Sender : TObject; tick : integer; const msg : string);
+    procedure OnEnergyError(Sender : TObject; tick : int64; const msg : string);
     procedure OnMeterUpdate(Sender : TObject; const meterData : TMeterRealTimeData; const inverterData : TInverterRealTimeData);
 
     // ###########################################
@@ -81,7 +81,7 @@ end;
 procedure TFroniusDB.CreateTestData(mon, year: integer);
 var dt1, dt2 : TDateTime;
     meterValues : TMeterRealTimeData;
-    inverterDAta : TInverterRealTimeData;
+    //inverterDAta : TInverterRealTimeData;
     actPlusPower : double;
     actMinusPower : double;
     actPV : double;
@@ -201,7 +201,7 @@ begin
         fOnLog(self, level, msg);
 end;
 
-procedure TFroniusDB.OnEnergyError(Sender: TObject; tick: integer;
+procedure TFroniusDB.OnEnergyError(Sender: TObject; tick: int64;
   const msg: string);
 begin
      // cleanup current
@@ -436,6 +436,11 @@ var curDay : TDateTime;
     lastUpdate : TDateTime;
 begin
      curDay := now;
+     lastUpdate := 0;
+     enconsume := 0;
+     enprod := 0;
+     engrid := 0;
+     entogrid := 0;
 
      // ###########################################
      // #### Update the day statistics according to the measured energy
@@ -448,12 +453,15 @@ begin
         // minusabsolute = entogrid: engergy to grid
         // enconsume: inverter.totalenergy - energytogrid + energy from grid
         // enproduced: inverter.totalenergy
-        lastDay := fAdapter.GetResDT('SAMPLETIME', -1);
-        enprod := fAdapter.GetRes('enproduced', 0);
-        enconsume := fAdapter.GetRes('ENCONSUME', 0);
-        engrid := fAdapter.GetRes('ENGRID', 0);
-        entogrid := fAdapter.GetRes('ENTOGRID', 0);
-        lastUpdate := fAdapter.GetResDT('LASTUPDATE', curday);
+        if not fAdapter.Eof then
+        begin
+             lastDay := fAdapter.GetResDT('SAMPLETIME', -1);
+             enprod := fAdapter.GetRes('enproduced', 0);
+             enconsume := fAdapter.GetRes('ENCONSUME', 0);
+             engrid := fAdapter.GetRes('ENGRID', 0);
+             entogrid := fAdapter.GetRes('ENTOGRID', 0);
+             lastUpdate := fAdapter.GetResDT('LASTUPDATE', curday);
+        end;
 
         fAdapter.Close;
 
@@ -477,12 +485,12 @@ begin
                   meterStart.EnergySumProduced := enprod + (inverterData.TotalEnergy - enprod)/dt*(1 - Frac(lastUpdate));
 
                   fAdapter.SetSQLText('Update Daystats set enproduced=:enproduced, enconsume=:enconsume, ENGRID=:ENGRID, ' +
-                                      'entogrid=:entogrid, lastupdate=:update where SampleTime=:SampleTime');
+                                      'entogrid=:entogrid, lastupdate=:lastupdate where SampleTime=:SampleTime');
                   fAdapter.SetParam('ENPRODUCED', meterStart.EnergySumProduced);
                   fAdapter.SetParam('ENCONSUME', meterStart.EnergySumConsumed);
                   fAdapter.SetParam('ENGRID', meterStart.EnergyPlusAbs);
                   fAdapter.SetParam('ENTOGRID', meterStart.EnergyMinusAbs);
-                  fAdapter.SetParamDT('update', Trunc(curDay));
+                  fAdapter.SetParamDT('lastupdate', Trunc(curDay));
 
                   fAdapter.ExecQuery;
              end;
@@ -490,9 +498,9 @@ begin
              // insert the new day
              fAdapter.SetSQLText('insert into DAYSTATS (SampleTime, ENPRODUCED, ENCONSUME, ENGRID, ENTOGRID, BeginProduced, ' +
                                  'BeginConsume, BeginGrid, BeginToGrid, LastUpdate) Values(:SampleTime, :ENPRODUCED, :ENCONSUME, :ENGRID, :ENTOGRID, ' +
-                                 ':BeginProduced, :BeginConsume, :BeginGrid, :BeginToGrid, :update)' );
+                                 ':BeginProduced, :BeginConsume, :BeginGrid, :BeginToGrid, :LastUpdate)' );
 
-             fAdapter.SetParamDT('sampleTime', Trunc(curDay));
+             fAdapter.SetParamDT('SampleTime', Trunc(curDay));
              fAdapter.SetParam('ENPRODUCED', inverterData.TotalEnergy);
              fAdapter.SetParam('ENCONSUME', inverterData.TotalEnergy - meterData.EnergyMinusAbs + meterData.EnergyPlusAbs);
              fAdapter.SetParam('ENGRID', meterData.EnergyPlusAbs);
@@ -502,7 +510,7 @@ begin
              fAdapter.SetParam('BeginConsume', meterStart.EnergySumConsumed);
              fAdapter.SetParam('BeginGrid', meterStart.EnergyPlusAbs);
              fAdapter.SetParam('BeginToGrid', meterStart.EnergyMinusAbs);
-             fAdapter.SetParamDT('update', curDay);
+             fAdapter.SetParamDT('LastUpdate', curDay);
 
              fAdapter.ExecQuery;
              fAdapter.Commit;
@@ -511,13 +519,13 @@ begin
         begin
              // just update the last elements
              fAdapter.SetSQLText('Update DAYSTATS set ENPRODUCED=:ENPRODUCED, ENCONSUME=:ENCONSUME, ' +
-                                 'ENGRID=:ENGRID, ENTOGRID=:ENTOGRID, lastupdate=:update where sampletime=:Sampletime');
+                                 'ENGRID=:ENGRID, ENTOGRID=:ENTOGRID, lastupdate=:lastupdate where sampletime=:Sampletime');
              fAdapter.SetParam('ENPRODUCED', inverterData.TotalEnergy);
              fAdapter.SetParam('ENCONSUME', inverterData.TotalEnergy - meterData.EnergyMinusAbs + meterData.EnergyPlusAbs);
              fAdapter.SetParam('ENGRID', meterData.EnergyPlusAbs);
              fAdapter.SetParam('ENTOGRID', meterData.EnergyMinusAbs);
 
-             fAdapter.SetParamDT('update', curDay);
+             fAdapter.SetParamDT('lastupdate', curDay);
              fAdapter.SetParamDT('sampletime', Trunc(curDay));
 
              fAdapter.ExecQuery;

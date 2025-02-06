@@ -74,6 +74,9 @@
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
+    <Target>
+      <Filename Value="../bin/TestFroniusAPI"/>
+    </Target>
     <SearchPaths>
       <IncludeFiles Value="../Src;$(ProjOutDir)"/>
       <OtherUnitFiles Value="../Src;/usr/local/codetyphon/typhon/components/packages_pl/pl_Indy/source/"/>
@@ -84,6 +87,17 @@
         <SyntaxMode Value="Delphi"/>
       </SyntaxOptions>
     </Parsing>
+    <CodeGeneration>
+      <Checks>
+        <IOChecks Value="True"/>
+        <RangeChecks Value="True"/>
+        <OverflowChecks Value="True"/>
+      </Checks>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+      <SmallerCode Value="True"/>
+    </CodeGeneration>
     <Linking>
       <Options>
         <Win32>

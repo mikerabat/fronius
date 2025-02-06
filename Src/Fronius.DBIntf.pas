@@ -6,10 +6,9 @@ interface
 {$MODE Delphi}
 {$ENDIF}
 
-uses SysUtils;
+uses SysUtils, Fronius.Consts;
 
 type
-  TLogEvent = procedure(Sender : TObject; level : integer; const msg : string) of Object;
   IFroniusDBAdapter = Interface
   ['{C2311489-1BCA-4785-B33B-562DF485B294}']
     procedure SetSQLText( const sql : string );

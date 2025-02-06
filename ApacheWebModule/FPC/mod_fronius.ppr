@@ -7,7 +7,7 @@ Uses
   cthreads,
 {$endif}
   SysUtils, CustApp, httpd24, interfaces, custapache24, fpApache24, froniusDataMod, pl_firebirddb,
-  Fronius.ModuleInit;
+  Fronius.ModuleInit, dl;
 
 Const
 
@@ -22,19 +22,30 @@ Const
 
   HandlerName='mod_fronius-handler';
 
+type
+  PModule = ^module;
+
 Var
   DefaultModule : module; {$ifdef unix} public name ModuleName;{$endif unix}
+  refMod : PModule;
+  dlHdl : Pointer;
 
-Exports defaultmodule name ModuleName;
+  Exports defaultmodule name ModuleName;
 
 {$R *.res}
 
 begin
+  // get global reference to DefaultModule -> don't know if that is sufficint...
+  // a direct reference to DefaultModule is forbidden by the linker!
+  dlHdl := dlopen(nil, RTLD_GLOBAL);
+  refMod := dlsym(dlHdl, ModuleName);
+
+
   Application.Title:='mod_fronius';
   Application.ModuleName:=ModuleName;
   Application.HandlerName:=HandlerName;
   Application.LegacyRouting := true;
-  Application.SetModuleRecord(DefaultModule);
+  Application.SetModuleRecord(refMod^);
   InitModule;
   Application.Initialize;
 end.

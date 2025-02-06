@@ -10,8 +10,8 @@ object frmFroniusAPI: TfrmFroniusAPI
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
+  LCLVersion = '8.4'
   OnDestroy = FormDestroy
-  LCLVersion = '8.0'
   object pnlLeft: TPanel
     Left = 0
     Height = 441
@@ -25,7 +25,7 @@ object frmFroniusAPI: TfrmFroniusAPI
     TabOrder = 0
     object edFroniusHost: TLabeledEdit
       Left = 16
-      Height = 32
+      Height = 25
       Top = 48
       Width = 153
       EditLabel.Height = 15
@@ -40,8 +40,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 96
       Width = 153
       Caption = 'Version'
-      OnClick = btnInverterInfoClick
       TabOrder = 1
+      OnClick = btnInverterInfoClick
     end
     object btnInverterInfo: TButton
       Left = 16
@@ -49,8 +49,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 127
       Width = 153
       Caption = 'Inverter Info'
-      OnClick = btnInverterInfoClick
       TabOrder = 2
+      OnClick = btnInverterInfoClick
     end
     object btnInverterRealTimeData: TButton
       Left = 16
@@ -58,8 +58,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 158
       Width = 153
       Caption = 'Inverter real time data'
-      OnClick = btnInverterInfoClick
       TabOrder = 3
+      OnClick = btnInverterInfoClick
     end
     object btnMeterRealTimeData: TButton
       Left = 16
@@ -67,8 +67,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 189
       Width = 153
       Caption = 'Meter real time data'
-      OnClick = btnInverterInfoClick
       TabOrder = 4
+      OnClick = btnInverterInfoClick
     end
     object btnPowerFlowRealTimeData: TButton
       Left = 16
@@ -76,8 +76,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 220
       Width = 153
       Caption = 'Powerflow Realtime Dta'
-      OnClick = btnInverterInfoClick
       TabOrder = 5
+      OnClick = btnInverterInfoClick
     end
     object btnOhmPIlotRealtime: TButton
       Left = 16
@@ -85,8 +85,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 251
       Width = 153
       Caption = 'Ohmpilot Realtime '
-      OnClick = btnInverterInfoClick
       TabOrder = 6
+      OnClick = btnInverterInfoClick
     end
     object btnStorageRealTimeData: TButton
       Left = 16
@@ -94,8 +94,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 282
       Width = 153
       Caption = 'Storage Realtime data'
-      OnClick = btnInverterInfoClick
       TabOrder = 7
+      OnClick = btnInverterInfoClick
     end
     object btnEngerestimate: TButton
       Left = 16
@@ -103,8 +103,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 352
       Width = 153
       Caption = 'Start Energy Estimate'
-      OnClick = btnEngerestimateClick
       TabOrder = 8
+      OnClick = btnEngerestimateClick
     end
     object btnConnectDB: TButton
       Left = 16
@@ -112,8 +112,8 @@ object frmFroniusAPI: TfrmFroniusAPI
       Top = 383
       Width = 153
       Caption = 'Connect DB'
-      OnClick = btnConnectDBClick
       TabOrder = 9
+      OnClick = btnConnectDBClick
     end
   end
   object memLog: TMemo

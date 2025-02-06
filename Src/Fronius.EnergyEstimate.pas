@@ -68,7 +68,7 @@ type
 
   TOnEnergyUpdate = procedure(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample) of Object;
   TOnMeterSample = procedure(Sender : TObject; const meter : TMeterRealTimeData; const inverterData : TInverterRealTimeData ) of Object;
-  TOnConnectionErr = procedure(Sender : TObject; tick : integer; const msg : string) of Object;
+  TOnConnectionErr = procedure(Sender : TObject; tick : int64; const msg : string) of Object;
   TFroniusEnergyEstThr = class(TThread)
   private
     fOnUpd : TOnEnergyUpdate;
@@ -100,7 +100,7 @@ type
     fCurDate : TDateTime;
     fOnMeterSample: TOnMeterSample;
 
-    function GetCurrTick : integer;
+    function GetCurrTick : int64;
     function TickAsDateTime( tick : integer ) : TDateTime;
     procedure UpdateStats;
     procedure UpdateMeter;
@@ -209,9 +209,9 @@ begin
      end;
 end;
 
-function TFroniusEnergyEstThr.GetCurrTick: integer;
+function TFroniusEnergyEstThr.GetCurrTick: int64;
 begin
-     Result := GetTickCount;
+     Result := Int64(GetTickCount64);
 end;
 
 procedure TFroniusEnergyEstThr.ResetStats(dt : TDateTime);

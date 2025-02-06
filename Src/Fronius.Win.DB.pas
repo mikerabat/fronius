@@ -8,7 +8,7 @@ interface
 
 uses
   {$IFNDEF FPC} System.SysUtils, System.Classes, {$ENDIF}
-  IBX.IBDatabase, Data.DB, IBX.IBSQL,
+  IBX.IBDatabase, Data.DB, IBX.IBSQL, Fronius.Consts,
   IBX.IBCustomDataSet, IBX.IBQuery, Fronius.DBIntf,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient;
 
@@ -57,7 +57,7 @@ var dmFronius: TdmFronius;
 
 implementation
 
-uses Fronius.Consts, {$IFDEF FPC} LCLIntf, LCLType, LMessages, {$ENDIF} Math,
+uses {$IFDEF FPC} LCLIntf, LCLType, LMessages, {$ENDIF} Math,
      Windows;
 
 {%CLASSGROUP 'System.Classes.TPersistent'}

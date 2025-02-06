@@ -206,8 +206,7 @@ begin
      if Result then
         data := SO( fDB.GetRes('data', '') );
      except
-           Writeln( 'Failed IsChallangeInit: ' + fDB.GetRes('data', '') );
-
+           FidoServer.Log(9, 'Failed IsChallangeInit: ' + fDB.GetRes('data', '') );
      end;
      fDB.Close;
      fDB.Commit;
@@ -236,7 +235,7 @@ begin
      if not fDB.Eof then
         Result := SO( fDB.GetRes('Data', '' ) );
      except
-           Writeln( 'Failed LoadAssert: ' + fDB.GetRes('data', '') );
+           FidoServer.Log(9, 'Failed LoadAssert: ' + fDB.GetRes('data', '') );
            raise
      end;
      fDB.Close;
@@ -281,14 +280,14 @@ begin
 
            if fDB.Eof then
               exit;
+
+           clientData := SO( fDB.GetRes('data', '{}' ) );
+
+           if fDB.GetResDT('modified', 0) < now - 5*SecsPerHour/SecsPerDay then
+              raise Exception.Create('Challenge too old');
         finally
                fDB.Close;
         end;
-
-        clientData := SO( fDB.GetRes('Data', '' ) );
-
-        if fDB.GetResDT('modified', 0) < now - 5*SecsPerHour/SecsPerDay then
-           raise Exception.Create('Challenge too old');
 
         // ###########################################
         // #### Prepare data as json

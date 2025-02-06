@@ -11,6 +11,8 @@ interface
 
 uses SysUtils, Types;
 
+{$DEFINE OPENSSL_3}  // some functions are renamed in V3 but otherwise backwards compatible
+
 // this unit is a stripped down version of OpenSSL.api_11 from Grijjy
 const
   {$IF Defined(WIN32)}
@@ -93,7 +95,8 @@ function EVP_DigestInit(ctx: Pointer; const md: Pointer): Integer; cdecl; extern
 function EVP_DigestUpdate(ctx: Pointer; const d: Pointer; cnt: LongWord): Integer; cdecl; external LIB_CRYPTO;
 function EVP_DigestFinal(ctx: Pointer; md: Pointer; s: PCardinal): Integer; cdecl; external LIB_CRYPTO;
 function EVP_DigestInit_ex(ctx: PEVP_MD_CTX; &type: PEVP_MD; impl: PENGINE): Integer; cdecl; external LIB_CRYPTO name _PU + 'EVP_DigestInit_ex';
-function EVP_MD_size(md: PEVP_MD): Integer; cdecl; external LIB_CRYPTO name _PU + 'EVP_MD_size';
+function EVP_MD_size(md: PEVP_MD): Integer; cdecl; external LIB_CRYPTO name _PU + {$IFDEF OPENSSL_3}'EVP_MD_get_size' {$ELSE} 'EVP_MD_size' {$ENDIF}; // EVP_MD_size for 1.1 -> renamed to EVP_MD_get_size in v3
+
 function EVP_DigestFinal_ex(ctx: PEVP_MD_CTX; md: PByte; s: PCardinal): Integer; cdecl; external LIB_CRYPTO name _PU + 'EVP_DigestFinal_ex';
 
 // bignum

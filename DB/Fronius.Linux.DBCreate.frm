@@ -8,6 +8,7 @@ object dmFroniusDBCreate: TdmFroniusDBCreate
     Connected = False
     CreateIfNotExists = False
     AllowStreamedConnected = False
+    FirebirdLibraryPathName = 'libfbclient.so.2'
     DefaultTransaction = ibTransaction
     IdleTimer = 0
     TraceFlags = []

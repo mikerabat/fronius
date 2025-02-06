@@ -150,6 +150,7 @@
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
       <Checks>
         <IOChecks Value="True"/>
         <RangeChecks Value="True"/>
@@ -159,18 +160,20 @@
       <VerifyObjMethodCallValidity Value="True"/>
     </CodeGeneration>
     <Linking>
+      <LinkSmart Value="True"/>
       <Options>
         <ExecutableType Value="Library"/>
       </Options>
     </Linking>
     <Other>
       <Verbosity>
-        <ShoLineNum Value="True"/>
+        <ShowLineNum Value="True"/>
         <ShowUsedFiles Value="True"/>
         <ShowTriedFiles Value="True"/>
       </Verbosity>
       <CustomOptions Value="-fPIC
--Xc"/>
+-Xc
+-Cg"/>
     </Other>
   </CompilerOptions>
   <Debugging>

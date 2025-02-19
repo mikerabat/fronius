@@ -121,13 +121,13 @@ begin
      cookie.Secure := True;
      cookie.HttpOnly := False;
      cookie.SameSite := ssStrict;
-     cookie.Value := 'sessionID=' + sessObj.GetSessionId;
+     cookie.Value := 'SessionID=' + sessObj.GetSessionId;
 
      cookieTxt := cookie.AsString;
      {$ELSE}
      cookieFields := TStringList.Create;
      try
-        cookieFields.Add('sessionID=' + sessObj.GetSessionId);
+        cookieFields.Add('SessionID=' + sessObj.GetSessionId);
         Response.SetCookieField(cookieFields, froniusConf.HTTPHost, '/', sessObj.GetExpire, True, False, 'strict');
      finally
             cookieFields.Free;

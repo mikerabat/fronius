@@ -23,11 +23,12 @@
 	<script src="./libs/jquery-ui.js"></script>
 
 
-	<script src="./libs/datepickerJQ.js"></script>
-    <script src="./libs/plotly-2.18.2.min.js"></script>
-	<script src="daySamples.js"></script>
-	<script src="currentstatus.js"></script>
-	<script src="barCharts.js"></script>
+	<script type="text/javascript" src="./libs/datepickerJQ.js"></script>
+    <script type="text/javascript" src="./libs/plotly-2.18.2.min.js"></script>
+	<script type="text/javascript" src="sessionUtils.js"></script>
+	<script type="text/javascript" src="daySamples.js"></script>
+	<script type="text/javascript" src="currentstatus.js"></script>
+	<script type="text/javascript" src="barCharts.js"></script>
 
 
 	  <script>
@@ -64,6 +65,7 @@
 	                     },
                          //crossDomain: true,
                          success: function(resp) {
+						              eraseSessionCookieFromAllPaths('SessionID'); 
 					                  window.location.replace('https://' + shost + '/login.html');
 								  }
 					  } )

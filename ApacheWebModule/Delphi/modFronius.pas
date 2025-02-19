@@ -4,7 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Classes, Web.HTTPApp, IBX.IBSQL, Data.DB,
-  IBX.IBDatabase, Fronius.DBIntf, Fronius.WebAuthnModuleInit, Fronius.WebDataHandler;
+  IBX.IBDatabase, Fronius.DBIntf, Fronius.WebAuthnModuleInit,
+  Fronius.WebDataHandler, Fronius.Consts;
 
 // ###########################################
 // #### Webmodule that serves as base for the db handling (implements the db adapter interface)

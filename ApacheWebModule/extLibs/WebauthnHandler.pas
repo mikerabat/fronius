@@ -840,7 +840,7 @@ begin
      if clientData = nil then
         exit;
 
-     FidoServer.Log(0, 'clientdatastr: ' + clientdatastr);
+     FidoServer.Log(0, 'clientdatastr: ' + string(clientdatastr));
      if clientData.S['type'] <> 'webauthn.get' then
         exit;
 

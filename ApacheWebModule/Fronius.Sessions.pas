@@ -240,7 +240,7 @@ begin
 
      // ###########################################
      // #### Extract session from cookie data...
-     sessId := request.CookieFields.Values['sessionID'];
+     sessId := request.CookieFields.Values['SessionID'];
      ipAddress := request.RemoteAddr;
 
      if sessID = '' then

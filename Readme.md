@@ -47,9 +47,20 @@ first... update raspi:
 Install [Firebird Database](https://firebirdsql.org/). Basically I used the tutorial from
 [here](https://linuxhint.com/install-firebird-raspberry-pi/)
 
+Use the password _masterkey_ (which is Firebird standard) when asked.
+
 ```
    sudo apt-get install firebird-server
 ```
+
+Per default he firebird service does not allow tcp/ip connections. We need to tweak the 
+config file a bit:
+
+```
+   sudo nano /etc/firebird/3.0/firebird.conf
+```
+
+Search for _RemoteBind_ and comment this field out. 
 
 The project solely relies on *WebAuthn* as means for login - there is one user that is allowed to
 create a passkey or a Fido2 key for login purposes. Thus we need two extra library 
@@ -88,6 +99,7 @@ Install Apache 2:
    sudo apt-get apache2
 ```   
 The apache version was 2.4.62 at the time of writing. 
+
 
 ### Installing the IDE ###
 
@@ -150,6 +162,7 @@ Run:
 ```
 
 If successfull it creates 
+* Create a database user "fronius" that will be used to create the database
 * A database at /var/lib/fronius/fronius.fdb
 * Installs the fronius acquisition daemon in /usr/bin/froniusd
 * Puts the main configuration file in /etc/froniusd.conf
@@ -166,6 +179,12 @@ If successfull it creates
 ```
 
 ### Configure apache
+
+The current state of the project needs the cgi module enabled in apache:
+
+```
+   sudo a2enmod cgid
+```
 
 In case you have already configured ssl and issued a certificate you can skip the following steps.
 Note that the automatic apache configuration relies on the fact that the certificate and key files are located as:
@@ -193,7 +212,6 @@ Edit the variables in the file for your needs.
 
 this creates the certificate files and places them to the standard directory.
 
-
 Test the configuration and restart apache
 
 ```
@@ -216,7 +234,7 @@ There are a few things on my todo list:
 * Update to fcgi or an apache module - For now I use the a simple cgi for the communication, which I admit is a waste of resources. I couldn't figure to get
   the Apache module working using FPC and a Raspberry PI due to compiler issues.
 * Eventually move the current power flow content update to a websocket which is more modern than polling.
-
+* The setup still requires the sysdba/masterkey standard Firebird user - this needs to be changed. Otherwise the install scripts need to be updated to serve these standard values.
 
 
 

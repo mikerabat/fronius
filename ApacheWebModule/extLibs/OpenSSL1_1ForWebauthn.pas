@@ -16,8 +16,9 @@ uses SysUtils, Types;
 // this unit is a stripped down version of OpenSSL.api_11 from Grijjy
 const
   {$IF Defined(WIN32)}
-  LIB_CRYPTO = 'libcrypto-1_1.dll';
-  LIB_SSL = 'libssl-1_1.dll';
+  // imports from openssl 3 instead of 1.1.
+  LIB_CRYPTO = 'libcrypto-3.dll'; // 'libcrypto-1_1.dll';
+  LIB_SSL = 'libssl-3.dll'; // 'libssl-1_1.dll';
   _PU = '';
   {$ELSEIF Defined(WIN64)}
   LIB_CRYPTO = 'libcrypto-1_1-x64.dll';

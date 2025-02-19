@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/libs/login.css">
 <title> Solar login </title>
-<script type="text/javascript" src="./libs/base64.js" language="javascript"></script>
-	<script type="text/javascript" src="./libs/cbor.js" language="javascript"></script>
-	<script type="text/javascript" src="./libs/jquery-3.2.1.min.js" language="javascript"></script>
-	<script type="text/javascript" src="webauthn.js" language="javascript"></script>
+<script type="text/javascript" src="./libs/base64.js"></script>
+	<script type="text/javascript" src="./libs/cbor.js"></script>
+	<script type="text/javascript" src="./libs/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="sessionUtils.js"></script>
+	<script type="text/javascript" src="webauthn.js"></script>
 	
 	<script type="text/javascript">
 	var shost = '';
@@ -29,7 +30,8 @@
 							
 						 } else {
 						    
-						    // not logged in -> stay here
+						    // not logged in -> stay here; erase all old data...
+							eraseSessionCookieFromAllPaths('SessionID'); 
 							detectWebAuthnSupport();
 							getFidoSettings();	
 						 }

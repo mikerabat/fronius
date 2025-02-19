@@ -1,14 +1,9 @@
 library mod_fronius;
 
 uses
-  {$IFDEF MSWINDOWS}
-  Winapi.ActiveX,
-  System.Win.ComObj,
-  {$ENDIF }
   Web.WebBroker,
   Web.ApacheApp,
   Web.HTTPD24Impl,
-  Fronius.Consts in '..\..\Src\Fronius.Consts.pas',
   Fronius.Globals in '..\Fronius.Globals.pas',
   Fronius.Sessions in '..\Fronius.Sessions.pas',
   Fronius.ModuleInit in '..\Fronius.ModuleInit.pas',
@@ -18,7 +13,6 @@ uses
   Fido2dll in '..\extLibs\Fido2dll.pas',
   superobject in '..\extLibs\superobject.pas',
   WebauthnHandler in '..\extLibs\WebauthnHandler.pas',
-  winCryptRandom in '..\extLibs\winCryptRandom.pas',
   Fronius.FidoDBData in '..\Fronius.FidoDBData.pas',
   OpenSSL1_1ForWebauthn in '..\extLibs\OpenSSL1_1ForWebauthn.pas',
   Fronius.Webauthn in '..\Fronius.Webauthn.pas',
@@ -26,7 +20,9 @@ uses
   Fronius.WebAuthnModuleInit in '..\Fronius.WebAuthnModuleInit.pas',
   Fronius.WebDataHandler in '..\Fronius.WebDataHandler.pas',
   modFronius in 'modFronius.pas' {wmFronius: TWebModule},
-  Fronius.ActionsBase in '..\Fronius.ActionsBase.pas';
+  Fronius.ActionsBase in '..\Fronius.ActionsBase.pas',
+  cryptRandom in '..\extLibs\cryptRandom.pas',
+  Fronius.Consts in '..\..\Src\Fronius.Consts.pas';
 
 {$R *.res}
 
@@ -47,9 +43,6 @@ exports
   GModuleData name 'fronius_module';
 
 begin
-{$IFDEF MSWINDOWS}
-  CoInitFlags := COINIT_MULTITHREADED;
-{$ENDIF}
   Web.ApacheApp.InitApplication(@GModuleData);
   Application.Initialize;
   Application.WebModuleClass := WebModuleClass;

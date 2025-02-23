@@ -1,0 +1,73 @@
+program fcgifronius;
+
+{$mode objfpc}{$H+}
+
+uses
+  cmemfix,   // needs to be first
+  cthreads,
+  sysutils,
+  //fpFCGI,
+  fpCGI,
+  froniusDataMod,
+  WebauthnHandler,
+  Fronius.Globals,
+  eventlog,
+  classes;
+
+type
+
+  { TLogEvt }
+
+  TLogEvt = class(TObject)
+  public
+    procedure LLog( Sender : TObject; level : integer; const msg : string );
+  end;
+
+var aLog : TLogEvt;
+
+procedure InitFidoServerObj;
+var fidoSrv : TFidoServer;
+begin
+     // fill fido server properties
+     fidoSrv := FidoServer;
+
+     // init...
+     fidoSrv.RelyingParty := froniusConf.HTTPHost;
+     fidoSrv.RelyingPartyId := froniusConf.HTTPHost;
+     fidoSrv.AttestType := atNone;
+     fidoSrv.UserVerification := True;
+     fidoSrv.RequireResidentKey := False;
+
+     Application.EventLogFilter := [etCustom,etInfo,etWarning,etError];
+
+     aLog := TLogEvt.Create;
+     fidoSrv.OnLog := @aLog.LLog;
+end;
+
+{ TLogEvt }
+
+procedure TLogEvt.LLog(Sender: TObject; level: integer; const msg: string);
+begin
+     if level >= froniusConf.LogLevel then
+        Application.Log( etError, msg);
+end;
+
+begin
+  Application.Title:='fcgifronius';
+  { Uncomment the port setting here if you want to run the 
+    FastCGI application stand-alone (e.g. for NGINX) }
+  // Application.Port:=2015; // For example
+  Application.LegacyRouting := True;
+  //Application.PreferModuleName := False;
+  //Application.AllowDefaultModule := True;
+  Application.EventLog.Active:=False;
+  Application.EventLog.LogType:=ltStdErr;
+  Application.EventLog.Active:=True;
+
+  Application.Initialize;
+  InitFidoServerObj;
+  Application.Run;
+
+  aLog.Free;
+end.
+

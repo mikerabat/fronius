@@ -11,11 +11,11 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="162"/>
-        <CursorPos X="101" Y="178"/>
+        <TopLine Value="5"/>
+        <CursorPos Y="20"/>
         <UsageCount Value="287"/>
         <Bookmarks Count="1">
-          <Item0 X="61" Y="60" ID="1"/>
+          <Item0 X="61" Y="59" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
@@ -167,10 +167,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="CreateFroniusDB.dpr"/>
-        <Caret Line="57" Column="29" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="CreateFroniusDB.dpr"/>
         <Caret Line="67" Column="25" TopLine="40"/>
       </Position>
       <Position>
@@ -285,6 +281,10 @@
         <Filename Value="../Src/Fronius.Consts.pas"/>
         <Caret Line="56" Column="13" TopLine="56"/>
       </Position>
+      <Position>
+        <Filename Value="CreateFroniusDB.dpr"/>
+        <Caret Line="178" Column="101" TopLine="161"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -315,7 +315,6 @@
         <Item8 Value="-db /home/rabatscher/Documents/Fronius/fronius.fdb -sql /home/rabatscher/Documents/Fronius/froniusdb.sql"/>
         <Item9 Value="-db fronius.fdb"/>
       </List>
-      <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
   </ProjectSession>
   <Debugging>
@@ -332,7 +331,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="CreateFroniusDB.dpr"/>
-        <Line Value="159"/>
+        <Line Value="158"/>
       </Item>
     </BreakPoints>
   </Debugging>

@@ -15,9 +15,8 @@ program CreateFroniusDB;
 
 {$IFNDEF FPC}
 {$APPTYPE CONSOLE}
-{$ENDIF}
-
 {$R *.res}
+{$ENDIF}
 
 uses
   SysUtils,

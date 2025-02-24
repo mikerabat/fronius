@@ -114,14 +114,16 @@ begin
      // according to the site we need to set the path and domain (so it is restricted).
      // the cookie is set in /fronius/login -> so set the path to '/' so it is valid for all elements on the site
      {$IFDEF FPC}
+     Response.Cookies.Clear;
      cookie := Response.Cookies.Add;
+     cookie.Name := 'SessionID';
      cookie.Domain := froniusConf.HTTPHost;
      cookie.Path := '/';
      cookie.Expires := sessObj.GetExpire;
      cookie.Secure := True;
      cookie.HttpOnly := False;
      cookie.SameSite := ssStrict;
-     cookie.Value := 'SessionID=' + sessObj.GetSessionId;
+     cookie.Value := sessObj.GetSessionId;
 
      cookieTxt := cookie.AsString;
      {$ELSE}

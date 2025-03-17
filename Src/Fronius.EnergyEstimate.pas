@@ -202,7 +202,7 @@ begin
                      waitIntv := fErrorInterval;
                      if Assigned(fOnConErr) then
                      begin
-                          fOnConErr( self, GetCurrTick, E.Message );
+                          fOnConErr( self, GetCurrTick, 'Unexpected exception. Changing wait interval. Failed with message: ' + E.Message );
                      end;
                 end;
           end;
@@ -252,6 +252,9 @@ begin
                fLastErrInverter := fFroniusInverterData.LastErrorMsg;
                exit;
           end;
+
+          fLastErrMeter := '';
+          fLastErrInverter := '';
 
           // ###########################################
           // #### report back the sample

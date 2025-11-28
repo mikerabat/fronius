@@ -9,14 +9,25 @@ uses
   Fronius.DB,
   Fronius.EnergyEstimate,
   Fronius.Linux.DB, Fronius.DBIntf,
+  Fronius.SharedMem,
   Fronius.Linux.Log;
 
+type
+  { TFroniusSharedMemObj }
+  TFroniusSharedMemObj = class(TObject)
+    procedure IssueCmd(Sender : TObject; const cmd : integer );
+    procedure OnUpdate(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample);
+  end;
 
 
 var engEstThr : TFroniusEnergyEstThr;
+    shareMemThr : TFroniusSharedMemThread;
     dbAdapt : IFroniusDBAdapter;
     DataMod : TFroniusDB;
     log : TFroniusLogFile;
+    shareMemObj : TFroniusSharedMemObj;
+
+
 
 // from daemonapp.inc
 procedure DaemonizeProgram;
@@ -58,6 +69,7 @@ begin
      dbAdapt := nil;
      FreeAndNil(dataMod);
      FreeAndNil(log);
+     FreeAndNil(shareMemObj);
 end;
 
 Procedure DoShutDown(Sig : Longint; Info : PSigInfo; Context : PSigContext); cdecl;
@@ -91,9 +103,18 @@ begin
      log.LogMsg('Start data collector thread for host ' + conf.FroniusHost);
      engEstThr := TFroniusEnergyEstThr.Create(conf.FroniusHost);
      engEstThr.OnUpdate := @dataMod.OnEnergyUpdate;
-	 engEstThr.OnMeterSample := @dataMod.OnMeterUpdate;
+     engEstThr.OnMeterSample := @dataMod.OnMeterUpdate;
      engEstThr.OnConnectionErr := @dataMod.OnEnergyError;
+     engEstThr.OnRequestDBRest := @dataMod.OnNeedResetAdapt;
      engEstThr.Start;
+
+     log.LogMsg('Start shared memory');
+
+     shareMemObj := TFroniusSharedMemObj.Create;
+     shareMemThr := TFroniusSharedMemThread.Create(5000);
+     shareMemThr.OnLog := @log.LogEvt;
+     shareMemThr.OnSharedServerCmd := @shareMemObj.IssueCmd;
+     engEstThr.OnUpdate := @shareMemObj.OnUpdate;
 end;
 
 procedure OpenDB;
@@ -115,6 +136,29 @@ begin
           DataMod.SetAdapter(dbAdapt);
           log.LogMsg('Connected db: ' + BoolToStr(dbAdapt.IsConnected, True));
      end;
+end;
+
+{$R *.res}
+
+{ TFroniusSharedMemObj }
+
+procedure TFroniusSharedMemObj.IssueCmd(Sender: TObject; const cmd: integer);
+begin
+     if cmd = TFroniusSharedMemThread.cSharedCmdRestart then
+     begin
+          log.LogMsg('Externl entity requested restart');
+          // todo:... restart
+     end;
+end;
+
+procedure TFroniusSharedMemObj.OnUpdate(Sender: TObject;
+  const period: TEnergyStatus; const PowerSample: TFlowDataSample);
+begin
+     // send info to apache via shared memory
+     shareMemThr.SetEnergyStatus(PowerSample);
+
+     // store in the db too..
+     dataMod.OnEnergyUpdate(Sender, period, PowerSample);
 end;
 
 begin

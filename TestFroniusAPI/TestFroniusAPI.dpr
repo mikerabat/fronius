@@ -8,7 +8,8 @@ uses
   Fronius.EnergyEstimate in '..\Src\Fronius.EnergyEstimate.pas',
   Fronius.Consts in '..\Src\Fronius.Consts.pas',
   Fronius.DB in '..\Src\Fronius.DB.pas',
-  Fronius.DBIntf in '..\Src\Fronius.DBIntf.pas';
+  Fronius.DBIntf in '..\Src\Fronius.DBIntf.pas',
+  Fronius.SharedMem in '..\Src\Fronius.SharedMem.pas';
 
 {$R *.res}
 

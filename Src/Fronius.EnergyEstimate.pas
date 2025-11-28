@@ -10,7 +10,7 @@ unit Fronius.EnergyEstimate;
 
 interface
 
-uses SysUtils, Classes, SyncObjs, Fronius.Data;
+uses SysUtils, Classes, SyncObjs, Fronius.Data, Fronius.Consts;
 
 type
   TEnergyStatus = class(TObject)
@@ -36,16 +36,6 @@ type
     property EnergyPVUse : double read fEnergy[ftPVUse];
   end;
 
-  TFlowDataSample = record
-    sampleTime : TDateTime;
-    PowerAkku : double;
-    PowerGrid : double;
-    PowerLoad : double;
-    PowerPV : double;
-    RelAutonomy : double;
-    RelSelfConsumption : double;
-  end;
-
   TMeterRealTimeData = record
     sampleTime : TDateTime;
     Serial : string;
@@ -69,8 +59,12 @@ type
   TOnEnergyUpdate = procedure(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample) of Object;
   TOnMeterSample = procedure(Sender : TObject; const meter : TMeterRealTimeData; const inverterData : TInverterRealTimeData ) of Object;
   TOnConnectionErr = procedure(Sender : TObject; tick : int64; const msg : string) of Object;
+
+  { TFroniusEnergyEstThr }
+
   TFroniusEnergyEstThr = class(TThread)
   private
+    fOnRequestDBReset: TNotifyEvent;
     fOnUpd : TOnEnergyUpdate;
     fInterval : integer;
     fOnConErr: TOnConnectionErr;
@@ -111,6 +105,7 @@ type
     property OnUpdate : TOnEnergyUpdate read fOnUpd write fOnUpd;
     property OnConnectionErr : TOnConnectionErr read fOnConErr write fOnConErr;
     property OnMeterSample : TOnMeterSample read fOnMeterSample write fOnMeterSample;
+    property OnRequestDBRest : TNotifyEvent read fOnRequestDBReset write fOnRequestDBReset;
 
     procedure SigTerminate;
 
@@ -178,8 +173,8 @@ begin
           try
              if fEvt.WaitFor(waitIntv) = wrTimeout then
              begin
-                  inc( fSampleTick, waitIntv);
-                  inc( fMeterTick, waitIntv);
+                  inc( fSampleTick, waitIntv );
+                  inc( fMeterTick, waitIntv );
 
                   if fSampleTick >= fInterval then
                   begin
@@ -198,11 +193,19 @@ begin
           except
                 on E : Exception do
                 begin
+                     if waitIntv = fErrorInterval then
+                     begin
+                          if Assigned(fOnConErr) then
+                             fOnConErr(Self, GetCurrTick, 'Another exception occured - trying to reconnect the db');
+
+                          if Assigned(fOnRequestDBReset) then
+                             fOnRequestDBReset(Self);
+                     end;
                      // in an error case slow down (network down?)
                      waitIntv := fErrorInterval;
                      if Assigned(fOnConErr) then
                      begin
-                          fOnConErr( self, GetCurrTick, E.Message );
+                          fOnConErr( self, GetCurrTick, 'Unexpected exception. Changing wait interval. Failed with message: ' + E.Message );
                      end;
                 end;
           end;
@@ -252,6 +255,9 @@ begin
                fLastErrInverter := fFroniusInverterData.LastErrorMsg;
                exit;
           end;
+
+          fLastErrMeter := '';
+          fLastErrInverter := '';
 
           // ###########################################
           // #### report back the sample

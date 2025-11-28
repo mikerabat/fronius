@@ -11,6 +11,9 @@ uses SysUtils, Classes, Fronius.Consts, Fronius.EnergyEstimate, SyncObjs,
 
 
 type
+
+  { TFroniusDB }
+
   TFroniusDB = class(TObject)
   private
     fStartSampleTick : int64;
@@ -45,6 +48,7 @@ type
     procedure OnEnergyUpdate(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample);
     procedure OnEnergyError(Sender : TObject; tick : int64; const msg : string);
     procedure OnMeterUpdate(Sender : TObject; const meterData : TMeterRealTimeData; const inverterData : TInverterRealTimeData);
+    procedure OnNeedResetAdapt(Sender : TObject );
 
     // ###########################################
     // #### Functions to setup some fake test data for simulating the Smart Meter
@@ -78,7 +82,7 @@ begin
      inherited;
 end;
 
-procedure TFroniusDB.CreateTestData(mon, year: integer);
+procedure TFroniusDB.CreateTestData(mon: integer; year: integer);
 var dt1, dt2 : TDateTime;
     meterValues : TMeterRealTimeData;
     //inverterDAta : TInverterRealTimeData;
@@ -311,6 +315,14 @@ begin
      {$ENDIF}
 end;
 
+procedure TFroniusDB.OnNeedResetAdapt(Sender: TObject);
+var errMsg : string;
+begin
+     fAdapter.ConnectToDB(errMsg);
+     if errMsg <> '' then
+        LLog(0, 'Failed to reconnect with msg ' + errMsg);
+end;
+
 procedure TFroniusDB.SetAdapter(dbAdapter: IFroniusDBAdapter);
 var fronConf : IFroniusConf;
 begin
@@ -339,9 +351,14 @@ end;
 
 procedure TFroniusDB.StoreDaySample(PowerSample: TFlowDataSample);
 begin
+     // todo: remove this -> it should be covered by the shared memory object
      if not Assigned(fAdapter) then
         exit;
 
+     {$IFDEF LINUX}
+     // we use shared memory on linux ;) -> do not insert that stuff into the db
+     exit;
+     {$ENDIF}
      {$IFNDEF FPC}
      TThread.CreateAnonymousThread(
          procedure

@@ -1,36 +1,34 @@
 object dmFronius: TdmFronius
-  Height = 383
-  Width = 439
+  Height = 479
+  Width = 549
+  PixelsPerInch = 120
   object FroniusDB: TIBDatabase
-    Connected = True
-    DatabaseName = 
-      'C:\Users\rabatscher\Documents\Embarcadero\Studio\Projekte\Froniu' +
-      's\DB\FRONIUS.FDB'
+    DatabaseName = 'C:\Users\mraba\Documents\DriveD\fronius\DB\FRONIUS.FDB'
     Params.Strings = (
       'user_name=sysdba'
       'password=masterkey')
     LoginPrompt = False
     DefaultTransaction = trFronius
     ServerType = 'IBServer'
-    Left = 48
-    Top = 80
+    Left = 60
+    Top = 100
   end
   object trFronius: TIBTransaction
     DefaultDatabase = FroniusDB
-    Left = 48
-    Top = 152
+    Left = 60
+    Top = 190
   end
   object sqlSample: TIBSQL
     Database = FroniusDB
     Transaction = trFronius
-    Left = 168
-    Top = 80
+    Left = 210
+    Top = 100
   end
   object idFirebirdTest: TIdTCPClient
     ConnectTimeout = 0
     Port = 0
     ReadTimeout = -1
-    Left = 48
-    Top = 232
+    Left = 60
+    Top = 290
   end
 end

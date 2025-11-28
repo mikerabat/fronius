@@ -9,7 +9,8 @@ interface
 uses
   SysUtils, Classes, Controls, Forms,
   {$IFDEF FPC} fpjson, {$ELSE} System.JSON, VCL.Mask, {$ENDIF}
-  Fronius.EnergyEstimate, Fronius.DBIntf, Fronius.DB, ExtCtrls, StdCtrls;
+  Fronius.EnergyEstimate, Fronius.DBIntf, Fronius.DB, Fronius.SharedMem,
+  Fronius.Consts, ExtCtrls, StdCtrls;
 
 type
 
@@ -28,23 +29,30 @@ type
     btnStorageRealTimeData: TButton;
     btnEngerestimate: TButton;
     btnConnectDB: TButton;
+    btnSharedMemThread: TButton;
     procedure btnInverterInfoClick(Sender: TObject);
     procedure btnEngerestimateClick(Sender: TObject);
+    procedure btnSharedMemThreadClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnConnectDBClick(Sender: TObject);
   private
     fEstimateThr : TFroniusEnergyEstThr;
     fDataMod : TFroniusDB;
-    {$IFDEF FPC}
+    fSharedMem : TFroniusSharedMemThread;
     fMsg : string;
+    {$IFDEF FPC}
+
 
     procedure LogMsg;
     {$ENDIF}
+
+    procedure ClearSharedMem;
     procedure ClearEstimateThread;
     procedure OnEnergyUpdate(Sender : TObject; const period : TEnergyStatus; const PowerSample : TFlowDataSample);
     procedure OnMeterSample(Sender : TObject; const meter : TMeterRealTimeData; const inverterData : TInverterRealTimeData);
     procedure OnEnergyError(Sender : TObject; tick : int64; const msg : string);
     procedure OnLog( Sender : TObject; level : integer; const msg : string);
+    procedure OnSharedMemSample(Sender : TObject; const PowerSample : TFlowDataSample);
   public
     { Public-Deklarationen }
   end;
@@ -92,6 +100,16 @@ begin
      end;
 end;
 
+procedure TfrmFroniusAPI.ClearSharedMem;
+begin
+     if Assigned(fSharedMem) then
+     begin
+          fSharedMem.SignalTerminate;
+          fSharedMem.WaitFor;
+          FreeAndNil(fSharedMem);
+     end;
+end;
+
 {$IFDEF FPC}
 procedure TfrmFroniusAPI.LogMsg;
 begin
@@ -115,6 +133,17 @@ begin
      begin
           btnEngerestimate.Caption := 'Start Energy Estimate';
           ClearEstimateThread;
+     end;
+end;
+
+procedure TfrmFroniusAPI.btnSharedMemThreadClick(Sender: TObject);
+begin
+     ClearSharedMem;
+
+     if not Assigned(fSharedMem) then
+     begin
+          fSharedMem := TFroniusSharedMemThread.Create( 1000 );
+          fSharedMem.OnSampleUpd := OnSharedMemSample;
      end;
 end;
 
@@ -175,6 +204,7 @@ end;
 procedure TfrmFroniusAPI.FormDestroy(Sender: TObject);
 begin
      ClearEstimateThread;
+     ClearSharedMem;
 
      if Assigned(fDataMod) then
         FreeAndNil(fDataMod);
@@ -232,12 +262,36 @@ begin
                         memLog.Lines.Add('');
                    end);
      {$ENDIF}
+
+     if Assigned(fSharedMem) then
+        fSharedMem.SetEnergyStatus(PowerSample);
 end;
 
 procedure TfrmFroniusAPI.OnLog(Sender: TObject; level: integer;
   const msg: string);
 begin
      memLog.Lines.Add(msg);
+end;
+
+procedure TfrmFroniusAPI.OnSharedMemSample(Sender: TObject;
+  const PowerSample: TFlowDataSample);
+begin
+     fMsg := Format('SharedMem: %s: Grid: %.1f, PV: %.1f, Load: %.1f W' + #13#10,
+                   [TimeToStr( PowerSample.sampleTime ),
+                    PowerSample.PowerGrid,
+                    PowerSample.PowerPV,
+                    PowerSample.PowerLoad
+                    ]);
+     {$IFDEF FPC}
+     TThread.Queue(nil, LogMsg);
+     {$ELSE}
+     TThread.Queue(nil,
+                   procedure
+                   begin
+                        memLog.Lines.Add(fMsg);
+                        memLog.Lines.Add('');
+                   end);
+     {$ENDIF}
 end;
 
 procedure TfrmFroniusAPI.OnMeterSample(Sender: TObject;

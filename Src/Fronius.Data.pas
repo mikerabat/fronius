@@ -463,15 +463,14 @@ begin
      obj := jsObj.FindPath(name);
      Result := obj <> nil;
      {$ELSE}
-     Result := jsObj.TryGetValue<TJSONValue>(name, obj);
+     obj := jsObj.FindValue(Name);
+     Result := (obj <> nil);
      {$ENDIF}
 end;
 
 function TFroniusBase.TryJsonGetDouble(jsObj: TJSONValue; name: string;
   var res: double): boolean;
-{$IFDEF FPC}
 var obj : TJSONValue;
-{$ENDIF}
 begin
      {$IFDEF FPC}
      obj := jsObj.FindPath(name);
@@ -479,7 +478,9 @@ begin
      if Result then
         res := obj.AsFloat;
      {$ELSE}
-     Result := jsObj.TryGetValue<Double>(name, res);
+     obj := jsObj.FindValue(Name);
+     Result := (obj <> nil) and (not obj.Null);
+     Result := Result and jsObj.TryGetValue<Double>(name, res);
      {$ENDIF}
 end;
 
@@ -1152,6 +1153,8 @@ end;
 function TFroniusPowerFlowRealTimeData.ReadOneInverter(
   inverter: TJSONValue): TFroniuseRealTimeInverterData;
 begin
+     if inverter = nil then
+        raise Exception.Create('No inverter data to read');
      Result := TFroniuseRealTimeInverterData.Create;
 
      Result.fDT := JsonGetInt(inverter, 'DT');

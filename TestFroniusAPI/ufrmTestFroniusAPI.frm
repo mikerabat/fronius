@@ -115,6 +115,15 @@ object frmFroniusAPI: TfrmFroniusAPI
       TabOrder = 9
       OnClick = btnConnectDBClick
     end
+    object btnSharedMemThread: TButton
+      Left = 16
+      Height = 25
+      Top = 415
+      Width = 155
+      Caption = 'Shared Mem'
+      TabOrder = 10
+      OnClick = btnSharedMemThreadClick
+    end
   end
   object memLog: TMemo
     Left = 185

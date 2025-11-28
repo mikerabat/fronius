@@ -13,7 +13,6 @@
         <CursorPos X="12" Y="6"/>
         <UsageCount Value="244"/>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="ufrmTestFroniusAPI.pas"/>
@@ -22,65 +21,53 @@
         <ComponentName Value="frmFroniusAPI"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="62"/>
-        <CursorPos Y="76"/>
+        <CursorPos X="18" Y="13"/>
         <UsageCount Value="244"/>
-        <Bookmarks Count="1">
-          <Item0 X="15" Y="180" ID="1"/>
-        </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.Data.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="422"/>
-        <CursorPos Y="441"/>
+        <CursorPos Y="4"/>
         <UsageCount Value="244"/>
         <Bookmarks Count="1">
           <Item0 X="3" Y="430" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="115"/>
-        <CursorPos X="22" Y="106"/>
+        <TopLine Value="7"/>
+        <CursorPos X="60" Y="13"/>
         <UsageCount Value="244"/>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.Consts.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="76"/>
-        <CursorPos X="24" Y="105"/>
+        <TopLine Value="59"/>
+        <CursorPos X="3" Y="62"/>
         <UsageCount Value="244"/>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.DB.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="505"/>
-        <CursorPos X="58" Y="519"/>
+        <TopLine Value="37"/>
+        <CursorPos X="15" Y="37"/>
         <UsageCount Value="244"/>
-        <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../Src/Fronius.Linux.DB.pas"/>
@@ -91,261 +78,239 @@
         <ResourceBaseClass Value="DataModule"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="130"/>
-        <CursorPos Y="144"/>
+        <TopLine Value="187"/>
+        <CursorPos X="11" Y="27"/>
         <UsageCount Value="244"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
-        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
         <FRMtype Value="0"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="147"/>
-        <CursorPos X="14" Y="157"/>
-        <UsageCount Value="121"/>
+        <TopLine Value="164"/>
+        <CursorPos Y="164"/>
+        <UsageCount Value="21"/>
+        <Bookmarks Count="1">
+          <Item0 X="9" Y="183" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_Indy/source/IdGlobal.pas"/>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/rtl-extra/src/unix/ipc.pp"/>
         <FRMtype Value="0"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="2203"/>
-        <CursorPos X="7" Y="2220"/>
-        <UsageCount Value="115"/>
-        <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/fcl-base/src/syncobjs.pp"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="9"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="57"/>
-        <CursorPos X="6" Y="73"/>
-        <UsageCount Value="26"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/objpas/sysutils/sysinth.inc"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="15"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="57"/>
-        <CursorPos X="4" Y="79"/>
-        <UsageCount Value="25"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="13"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1844"/>
-        <CursorPos X="3" Y="1857"/>
-        <UsageCount Value="25"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="14"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="27"/>
-        <CursorPos X="4" Y="39"/>
-        <UsageCount Value="25"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_Indy/source/IdIOHandlerStack.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="460"/>
-        <CursorPos Y="474"/>
         <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/libc/src/smmaph.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="113" Y="25"/>
+        <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/libc/src/libc.pp"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="153"/>
+        <CursorPos X="10" Y="169"/>
+        <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/netwlibc/libc.pp"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="175"/>
+        <CursorPos X="2" Y="982"/>
+        <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/rtl-console/src/netware/nwsys.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="25" Y="18"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/linux/ostypes.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/unix/baseunix.pp"/>
+        <FRMtype Value="0"/>
+        <UnitName Value="BaseUnix"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="74"/>
+        <CursorPos X="15" Y="108"/>
+        <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/libc/src/unistdh.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <CursorPos X="68" Y="4"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/packages/libgbafpc/src/maxmod/maxmod.pp"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="29"/>
+        <CursorPos Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/unix/unix.pp"/>
+        <FRMtype Value="0"/>
+        <UnitName Value="Unix"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="772"/>
+        <CursorPos X="72" Y="788"/>
+        <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/unix/bunxh.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <UsageCount Value="10"/>
         <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_Indy/source/IdStack.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="967"/>
-        <CursorPos Y="980"/>
-        <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/lcl/lclmessageglue.pas"/>
-        <FRMtype Value="0"/>
-        <UnitName Value="LCLMessageGlue"/>
-        <EditorIndex Value="2"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="109"/>
-        <CursorPos X="38" Y="115"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/FBMessages.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="389"/>
-        <CursorPos Y="411"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/runtime/IBSQL.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="799"/>
-        <CursorPos Y="813"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/FBAttachment.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="12"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1152"/>
-        <CursorPos X="40" Y="1159"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/FBActivityMonitor.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="182"/>
-        <CursorPos Y="198"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/2_5/FB25Statement.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1264"/>
-        <CursorPos Y="1279"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/usr/local/codetyphon/typhon/components/packages_pl/pl_FirebirdDB/source/fbintf/2_5/FB25Attachment.pas"/>
-        <FRMtype Value="0"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="278"/>
-        <CursorPos Y="294"/>
-        <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="24">
+    <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="159" TopLine="145"/>
+        <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
+        <Caret Line="547" TopLine="535"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="160" TopLine="145"/>
+        <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
+        <Caret Line="551" TopLine="535"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="451" TopLine="437"/>
+        <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
+        <Caret Line="555" TopLine="535"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="444" Column="47" TopLine="437"/>
+        <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
+        <Caret Line="556" TopLine="535"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="159" TopLine="145"/>
+        <Filename Value="/usr/local/codetyphon/fpcsrc/rtl/unix/bunxh.inc"/>
+        <Caret Line="99" Column="15" TopLine="83"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="298" TopLine="284"/>
+        <Filename Value="../Src/Fronius.EnergyEstimate.pas"/>
+        <Caret Line="173" Column="5" TopLine="158"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="159" TopLine="145"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="277" Column="14" TopLine="250"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="228" TopLine="214"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="144" Column="21" TopLine="137"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="159" TopLine="145"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="160" TopLine="145"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="40" Column="15" TopLine="14"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="451" TopLine="437"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="103" Column="28" TopLine="77"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="186" TopLine="172"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="105" Column="21" TopLine="79"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="188" TopLine="172"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="106" Column="21" TopLine="80"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="189" TopLine="172"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="107" Column="32" TopLine="81"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="191" TopLine="172"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="141" Column="32" TopLine="115"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="458" TopLine="437"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="143" Column="21" TopLine="117"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="159" TopLine="145"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="144" Column="21" TopLine="118"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="298" TopLine="284"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="230" Column="40" TopLine="229"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="223" TopLine="214"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="144" TopLine="130"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="49" Column="29" TopLine="24"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.Linux.DB.pas"/>
-        <Caret Line="144" TopLine="130"/>
+        <Filename Value="../Src/Fronius.Data.pas"/>
+        <Caret Line="241" Column="57" TopLine="208"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="499" Column="30" TopLine="492"/>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="80" Column="5" TopLine="62"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="515" Column="27" TopLine="492"/>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="76" Column="21" TopLine="72"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="151" Column="24" TopLine="142"/>
       </Position>
       <Position>
-        <Filename Value="../Src/Fronius.DB.pas"/>
-        <Caret Line="493" Column="50" TopLine="480"/>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="63" Column="38" TopLine="39"/>
+      </Position>
+      <Position>
+        <Filename Value="ufrmTestFroniusAPI.pas"/>
+        <Caret Line="13" Column="3"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.Consts.pas"/>
+        <Caret Line="62" Column="3" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="12" Column="46" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="82" Column="12" TopLine="58"/>
+      </Position>
+      <Position>
+        <Filename Value="../Src/Fronius.SharedMem.pas"/>
+        <Caret Line="197" TopLine="184"/>
       </Position>
     </JumpHistory>
     <RunParams>

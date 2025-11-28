@@ -27,7 +27,7 @@ type
 
 implementation
 
-uses Fronius.Sessions, Fronius.Globals, math;
+uses Fronius.Sessions, Fronius.Globals, Fronius.SharedMem, Fronius.Consts, math;
 
 type
   TFroniusWebDataType = (wdCurSample, wdDaySample, wdBarSample);
@@ -319,32 +319,61 @@ end;
 
 procedure TFroniusDataPathHandler.HandleCurSample(Request: TWebRequest;
   Response: TWebResponse);
+var sharedMem : TFroniusSharedMemThread;
+    pwr : TFlowDataSample;
 begin
      // ###########################################
-     // #### now fetch the last sample from the database
-     // -> normaly this one is updated every 2 seconds
-     fDB.SetSQLText('select first 1 * from daysamples where sampletime>:t1 order by sampletime descending');
-     fDB.SetParamDT('t1', now - 30/SecsPerDay); // sample as max as 30 seconds in the past
-     fDB.ExecQuery;
+     // #### fetch the last sample via shared memory with the "froniusd" deamon
+     try
+         sharedMem := TFroniusSharedMemThread.CreateNonThreaded;
+         try
+            if sharedMem.GetCurrentEnergyStatus(pwr) then
+            begin
+                 Response.Content := Format('{"t":"%s","tf":%.6f,"PPV":%.1f,"PL":%.1f,"PG":%.1f,"RA":%.2f,"RSC":%.2f}',
+                                [
+                                 FormatDateTime(fmt.LongDateFormat + ' ' + fmt.LongTimeFormat, pwr.sampleTime),
+                                 pwr.sampleTime,
+                                 pwr.PowerPV,
+                                 pwr.PowerLoad,
+                                 pwr.PowerGrid,
+                                 pwr.RelAutonomy,
+                                 pwr.RelSelfConsumption
+                                ], fmt);
+            end;
+         finally
+                sharedMem.Free;
+         end;
+     except
+           on E : Exception do
+           begin
+                 // ###########################################
+                 // #### now fetch the last sample from the database
+                 // -> normaly this one is updated every 2 seconds
+                 fDB.SetSQLText('select first 1 * from daysamples where sampletime>:t1 order by sampletime descending');
+                 fDB.SetParamDT('t1', now - 30/SecsPerDay); // sample as max as 30 seconds in the past
+                 fDB.ExecQuery;
 
-     if not fDB.Eof then
-     begin
-          Response.Content := Format('{"t":"%s","tf":%.6f,"PPV":%.1f,"PL":%.1f,"PG":%.1f,"RA":%.2f,"RSC":%.2f}',
-                            [
-                             FormatDateTime(fmt.LongDateFormat + ' ' + fmt.LongTimeFormat, fDB.GetResDT('SampleTime', 0)),
-                             fDB.GetResDT('SampleTime', 0.0),
-                             fDB.GetRes('POWERPV', 0.0001),
-                             fDB.GetRes('POWERLOAD', 0.0001),
-                             fDB.GetRes('POWERGRID', 0.0001),
-                             fDB.GetRes('RELAUTONOMY', 0.0001),
-                             fDB.GetRes('RELSELFCONSUMPTION', 0.0001)
-                            ], fmt);
-     end
-     else
-         Response.Content := ' {"error":1,"msg":"Database not updated in time"}';
+                 if not fDB.Eof then
+                 begin
+                      Response.Content := Format('{"t":"%s","tf":%.6f,"PPV":%.1f,"PL":%.1f,"PG":%.1f,"RA":%.2f,"RSC":%.2f,"err":"Share mem faild: %s - use db alternative"}',
+                                        [
+                                         FormatDateTime(fmt.LongDateFormat + ' ' + fmt.LongTimeFormat, fDB.GetResDT('SampleTime', 0)),
+                                         fDB.GetResDT('SampleTime', 0.0),
+                                         fDB.GetRes('POWERPV', 0.0001),
+                                         fDB.GetRes('POWERLOAD', 0.0001),
+                                         fDB.GetRes('POWERGRID', 0.0001),
+                                         fDB.GetRes('RELAUTONOMY', 0.0001),
+                                         fDB.GetRes('RELSELFCONSUMPTION', 0.0001),
+                                         E.message
+                                        ], fmt);
+                 end
+                 else
+                     Response.Content := ' {"error":1,"msg":"Database not updated in time"}';
 
-     fDB.Close;
-     fDB.Commit;
+                 fDB.Close;
+                 fDB.Commit;
+           end;
+     end;
 end;
 
 procedure TFroniusDataPathHandler.HandleDaySample(Request: TWebRequest;

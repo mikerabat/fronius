@@ -11,6 +11,7 @@ interface
 
 uses SysUtils;
 
+
 // ###########################################
 // #### Database
 const {$IFDEF MSWINDOWS}
@@ -54,6 +55,19 @@ type
 function FroniusConfig : IFroniusConf;
 
 procedure InitConfig( dbName : string; dbUser, dbPwd : string; fn : string; logfn : string; fbLib : string; froniusHost : string; httpHost : string);
+
+
+// shared data structures
+type
+  TFlowDataSample = record
+    sampleTime : TDateTime;
+    PowerAkku : double;
+    PowerGrid : double;
+    PowerLoad : double;
+    PowerPV : double;
+    RelAutonomy : double;
+    RelSelfConsumption : double;
+  end;
 
 implementation
 

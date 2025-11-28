@@ -2,7 +2,7 @@ object frmFroniusAPI: TfrmFroniusAPI
   Left = 0
   Top = 0
   Caption = 'Test Fronius API'
-  ClientHeight = 441
+  ClientHeight = 461
   ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,11 +16,11 @@ object frmFroniusAPI: TfrmFroniusAPI
     Left = 0
     Top = 0
     Width = 185
-    Height = 441
+    Height = 461
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 440
+    ExplicitHeight = 433
     object edFroniusHost: TLabeledEdit
       Left = 16
       Top = 48
@@ -113,15 +113,25 @@ object frmFroniusAPI: TfrmFroniusAPI
       TabOrder = 9
       OnClick = btnConnectDBClick
     end
+    object btnSharedMemThread: TButton
+      Left = 16
+      Top = 414
+      Width = 153
+      Height = 25
+      ParentCustomHint = False
+      Caption = 'Shared Mem Thread'
+      TabOrder = 10
+      OnClick = btnSharedMemThreadClick
+    end
   end
   object memLog: TMemo
     Left = 185
     Top = 0
     Width = 439
-    Height = 441
+    Height = 461
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 435
-    ExplicitHeight = 440
+    ExplicitWidth = 437
+    ExplicitHeight = 433
   end
 end

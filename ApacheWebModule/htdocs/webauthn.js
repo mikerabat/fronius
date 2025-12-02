@@ -132,7 +132,7 @@ var state = {
 }
 
 function setUser() {
-    username = $("#input-email").val();
+    username = $("#username").val();
     state.user.name = username.toLowerCase().replace(/\s/g, '');
     state.user.displayName = username.toLowerCase();
 }
@@ -158,7 +158,7 @@ function getCredentials() {
 function makeCredential() {
     hideErrorAlert();
     console.log("Fetching options for new credential");
-    if ($("#input-email").val() === "") {
+    if ($("#username").val() === "") {
         showErrorAlert("Please enter a username");
         return;
     }
@@ -284,7 +284,7 @@ function DoAssert() {
 
 function getAssertion() {
     hideErrorAlert();
-    if ($("#input-email").val() === "") {
+    if ($("#username").val() === "") {
         showErrorAlert("Please enter a username");
 		return;
     }

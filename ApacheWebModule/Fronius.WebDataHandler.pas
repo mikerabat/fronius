@@ -19,6 +19,7 @@ type
     procedure HandleDaySample( Request : TWebRequest; Response : TWebResponse );
     procedure HandleCurSample( Request : TWebRequest; Response : TWebResponse );
 
+    function FirstYear : word;
   protected
     procedure Handler(Sender: TObject; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
   public
@@ -79,6 +80,7 @@ var fromDate, toDate : TDateTime;
     lastEnCons : double;
     lastEnGrid : double;
     lastEnToGrid : double;
+    fromYear : word;
 begin
      // ###########################################
      // #### Return the day/month/year statistics as "bars"
@@ -102,20 +104,24 @@ begin
           exit;
      end;
 
-     aYear := word(getIntParam(Request, 'fromYear', CurrentYear));
+     aYear := word(getIntParam(Request, 'fromYear', 0));
      aMonth := word(getIntParam(Request, 'fromMon', 1));
      aDay := word(getIntParam(Request, 'fromDay', 1));
+
+     if aYear = 0 then
+        aYear := FirstYear;
 
      if not TryEncodeDate(aYear, aMonth, aDay, fromDate) then
      begin
           Response.Content := '{"error":1, "msg":"Bad date format"}';
           exit;
      end;
+     fromYear := aYear;
 
      actMon := Max(1, aMonth) - 1;
      actYear := Max(1, aYear) - 1;
 
-     aYear := word(getIntParam(Request, 'toYear', aYear));
+     aYear := word(getIntParam(Request, 'toYear', CurrentYear));
      aMonth := word(getIntParam(Request, 'toMon', 12));
      aDay := word(getIntParam(Request, 'fromDay', 0));
      if (aDay = 0) and (aMonth >= 1) and (aMonth <= 12) then
@@ -133,7 +139,9 @@ begin
           exit;
      end;
 
-
+     // special handling of monthly bars -> only allow in one year (from "toDate")
+     if barType = 1 then
+        fromDate := EncodeDate(aYear, 1, 1);
      // ###########################################
      // #### Collect data
      try
@@ -266,7 +274,7 @@ begin
         end
         else
         begin
-             // get last element in the db -> difference is the recorded energy
+             // get first element in the db -> difference is the recorded energy
              fDB.SetSQLText('select first 1 * from Daystats');
              fDB.ExecQuery;
 
@@ -374,6 +382,17 @@ begin
                  fDB.Commit;
            end;
      end;
+end;
+
+function TFroniusDataPathHandler.FirstYear: word;
+var aMon, aDay : Word;
+begin
+     fDB.SetSQLText('Select first 1 * from Samples');
+     fDB.ExecQuery;
+     Result := CurrentYear;
+     if not fDB.Eof then
+        DecodeDate(fDB.GetResDT('SAMPLETIME', now), Result, aMon, aDay);
+     fDB.Close;
 end;
 
 procedure TFroniusDataPathHandler.HandleDaySample(Request: TWebRequest;

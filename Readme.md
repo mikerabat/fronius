@@ -60,7 +60,12 @@ config file a bit:
    sudo nano /etc/firebird/3.0/firebird.conf
 ```
 
-Search for _RemoteBind_ and comment this field out. 
+Search for _RemoteBindAddress_ and set the value to 127.0.0.1.
+Search for _RemoteAccess_ and set the value to true.
+
+Please note: my last installation on Rapsberry "Trixie" had components of the 4.0 server installed - especially the
+client library. You need to make sure that the _RemoteServicePort_ is set to 3050 in both, 3.0 and 4.0. The 4.0 server
+is not running but the client library takes the default value from there.
 
 The project solely relies on *WebAuthn* as means for login - there is one user that is allowed to
 create a passkey or a Fido2 key for login purposes. Thus we need two extra library 
@@ -98,7 +103,7 @@ Install Apache 2:
 ```
    sudo apt-get apache2
 ```   
-The apache version was 2.4.62 at the time of writing. 
+The apache version was 2.4.69 at the time of writing. 
 
 
 ### Installing the IDE ###
@@ -190,7 +195,7 @@ In case you have already configured ssl and issued a certificate you can skip th
 Note that the automatic apache configuration relies on the fact that the certificate and key files are located as:
 
 _/etc/ssl/private/fronius.key_ and _/etc/ssl/certs/fronius.crt_
-if not then please adjust the /etc/apache2/sites-available/fronius.conf file accordingly!
+if not then please adjust the /etc/apache2/sites-available/fronius.conf file accordingly or create symbolic links!
 
 We need ssl enabled on the apache:
 
@@ -223,6 +228,16 @@ Test the configuration and restart apache
 
 This routine was created on my local raspberry pi at home - maybe some things do not work as expected... Sorry for that.
 The log files are found in _/var/log/apache2/fronius.log_ for apache related stuff and _/var/log/fronius.log_ for the daemon output.
+
+It is recommended that the database file as well as the log file is put on an external drive. The SD card is prone to wear out
+pretty fast. Just move the file and create a symbolic link instead. Don''t forget to take the right ownership e.g. by issuing
+
+```
+   cd /var/lib/fronius
+   mv fronius.fdb /media/<yourpathtossd>
+   ln -s /media/<yourpathtossd>/fronius.fdb
+   sudo chown -h firebird:firebird fronius.fdb
+```   
 
 The system does not support any passwords! Webauthn is the only way to login. You can only add (one) devices if you are connected to the same
 lan segment as the web server resides (e.g. the home wlan). Supporting multiple devices is still on the todo list - as well as std passwords. 

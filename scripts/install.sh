@@ -53,6 +53,8 @@ sudoFunc () {
     DAEMONSERVICE=fronius
     #DAEMONSERVICE=fronius.service
     FBLIBRARY=libfbclient.so.2
+    DBUSER=sysdba
+    DBPWD=
 
     # apache config
     FRONIUSHOST=fronius
@@ -109,8 +111,14 @@ sudoFunc () {
     if [ ! -f "$DBFILE" ]
     then
         echo start db creation tool...
-    
-        $CREATEDB -db $DBFILECONNSTR -sql $SQLFILE -createconf -log $LOGFILE -httpHost "$HTTPHOST" -fbclientlib $FBLIBRARY
+        if [ -z "$DBPWD" ]; 
+	then
+	    read -r -s -p 'Password (default = masterkey): ' DBPWD
+
+	    echo
+            DBPWD="${DBPWD:-masterkey}"
+	fi
+        $CREATEDB -db $DBFILECONNSTR -sql $SQLFILE -createconf -log $LOGFILE -httpHost "$HTTPHOST" -fbclientlib $FBLIBRARY -user $DBUSER -password $DBPWD
         chown firebird:firebird $DBFILE	
     else
         echo database already exists
@@ -120,7 +128,7 @@ sudoFunc () {
     if [ -d $APACHEWWW ]
     then
         echo "Fronius http root already exists."
-        read -r -p "Overwrite (Y/N)" response
+        read -r -p 'Overwrite (Y/N)' response
         if [ "$response" = "y" ]
         then
             # remove the old http root -> indiates the installer shall copy our content
@@ -193,6 +201,6 @@ sudoFunc () {
 
 ### execute database creation
 FUNC=$( declare -f sudoFunc )
-sudo -H sh -c "$FUNC; sudoFunc;"
+sudo -H bash -c "$FUNC; sudoFunc;"
 
 

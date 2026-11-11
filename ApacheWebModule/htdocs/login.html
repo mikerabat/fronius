@@ -1,68 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/libs/login.css">
-<title> Solar login </title>
-<script type="text/javascript" src="./libs/base64.js"></script>
-	<script type="text/javascript" src="./libs/cbor.js"></script>
-	<script type="text/javascript" src="./libs/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="sessionUtils.js"></script>
-	<script type="text/javascript" src="webauthn.js"></script>
-	
-	<script type="text/javascript">
-	var shost = '';
-	
-	$(function() {
-		    // check the current status... redirect to login if necessary...
-	        $.ajax({
-                url: '/fronius/checksession',
-		        xhrFields: {
-				  withCredentials: true
-				},      
-				//crossDomain: true,
-				dataType: "json",
-                success: function(resp) {
-				         if(resp.session==1) {
-						    // ############################################
-							// #### we have a sessions -> now visit the main site
-							window.location.replace('https://' + resp.host + '/index.html');
-							
-						 } else {
-						    
-						    // not logged in -> stay here; erase all old data...
-							eraseSessionCookieFromAllPaths('SessionID'); 
-							detectWebAuthnSupport();
-							getFidoSettings();	
-						 }
-					  },
-				error: function(xhr, status, error ) {
-				   // an error occured -> just stay here
-				   
-				   
-				}
-		});
-		});
-	</script>
-	
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Solar">
+  <title>Solar Monitor – Anmelden</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/common.js"></script>
+  <script src="js/login.js" defer></script>
 </head>
 <body>
-  <body>
-    <div class="login-page">
-      <div class="form">
-        <div class="login">
-          <div class="login-header">
-            <h3>Solar LOGIN</h3>
-            <p>Please use your passkey to login.</p>
+  <div class="login-wrap">
+    <main class="login-card" aria-labelledby="title">
+      <div id="logo" class="login-logo"></div>
+      <h1 id="title">Solar Monitor</h1>
+      <p class="lead">Melde dich mit deinem Passkey an.</p>
+
+      <div class="login-stack">
+        <button id="btn-login" class="btn btn-primary btn-lg" type="button">
+          <span class="ico" data-icon="key"></span><span class="txt">Mit Passkey anmelden</span>
+        </button>
+
+        <!-- Nur nötig für Passkeys, die mit der alten Seite registriert wurden -->
+        <form id="legacy-user" class="login-stack hidden" autocomplete="on">
+          <p class="msg">Dieser Passkey stammt noch von der alten Anmeldeseite. Bitte gib einmalig deinen Benutzernamen ein – danach merkt sich dieser Browser die Zuordnung.</p>
+          <label class="field">Benutzername
+            <input id="legacy-name" class="input" name="username" autocomplete="username" required>
+          </label>
+          <button class="btn btn-primary" type="submit">Weiter</button>
+        </form>
+
+        <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
+      </div>
+
+      <details id="other" class="setup">
+        <summary>Weitere Optionen</summary>
+        <div class="login-stack">
+          <form id="form-uname-login" class="login-stack">
+            <label class="field">Mit Benutzername anmelden
+              <input id="uname-login" class="input" name="username" autocomplete="username webauthn" placeholder="Benutzername">
+            </label>
+            <button class="btn" type="submit">Anmelden</button>
+          </form>
+
+          <div id="enroll" class="hidden">
+            <div class="divider">Neuen Passkey einrichten</div>
+            <form id="form-enroll" class="login-stack">
+              <label class="field">Name
+                <input id="enroll-name" class="input" name="username" autocomplete="username" maxlength="48" placeholder="z. B. michael" required>
+              </label>
+              <button class="btn" type="submit"><span class="ico" data-icon="key"></span>Passkey erstellen</button>
+              <p class="hint">Das Einrichten ist nur aus dem Heimnetz möglich. Der Passkey wird auf diesem Gerät, im Passwortmanager oder auf einem Sicherheitsschlüssel gespeichert.</p>
+            </form>
           </div>
         </div>
-        <!-- <form class="login-form"> -->
-          <input name="username" id="username" autocomplete="username webauthn" autofocus/>
-          <button onclick="getAssertion()" id="login-button">login</button>
-		  <p id="register-paragraph" class="message">Not registered? <a onclick="makeCredential()" id="register-button">Register a device</a></p>
-        <!-- </form>-->
-      </div>
-    </div>
-</body>
+      </details>
+    </main>
+  </div>
 </body>
 </html>

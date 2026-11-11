@@ -1,286 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Fronius Dashboard  </title>
-  <!-- Load plotly.js into the DOM -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src='https://cdn.plot.ly/plotly-2.18.2.min.js'></script>
-	-->
-	<!--
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    -->
-
-	<link rel="stylesheet" href="./libs/style.css">
-    <link rel="stylesheet" href="./libs/datepicker.css">
-	<link rel="stylesheet" href="./libs/jquery-ui.css">
-	<link rel="stylesheet" href="./libs/reset.min.css">
-	<script src="./libs/jquery.js"></script>
-	<script src="./libs/jquery-ui.js"></script>
-
-
-	<script type="text/javascript" src="./libs/datepickerJQ.js"></script>
-    <script type="text/javascript" src="./libs/plotly-2.18.2.min.js"></script>
-	<script type="text/javascript" src="sessionUtils.js"></script>
-	<script type="text/javascript" src="daySamples.js"></script>
-	<script type="text/javascript" src="currentstatus.js"></script>
-	<script type="text/javascript" src="barCharts.js"></script>
-
-
-	  <script>
-	    var shost = '';
-
-	    function onPickMonth( dt )
-		{
-		   updateDaysChart( dt.getMonth() + 1, dt.getFullYear() );
-		}
-
-		function onPickDay(dt)
-		{
-		   updateDaySample( dt );
-		}
-		function onPickYear(dt)
-		{
-		   updateMonthChart( dt.getFullYear() );
-		}
-
-		function initView() {
-		    createDatePicker("datepickerYear", onPickYear, 2);
-			createDatePicker("datepickerMonth", onPickMonth, 1);
-			createDatePicker("datepickerDay", onPickDay, 0);
-			initDayChart();
-			initPVStatusView();
-			initBarCharts();
-			$("#logout").on("click", 
-	                function () {
-					  $.ajax({
-                         url: 'fronius/logout',
-		                 dataType: "json",
-                         xhrFields: {
-		                    withCredentials: true
-	                     },
-                         //crossDomain: true,
-                         success: function(resp) {
-						              eraseSessionCookieFromAllPaths('SessionID'); 
-					                  window.location.replace('https://' + shost + '/login.html');
-								  }
-					  } )
-					} );  
-		}
-
-	    $(function() {
-		    // check the current status... redirect to login if necessary...
-	        $.ajax({
-                url: 'fronius/checksession',
-		        dataType: "json",
-                xhrFields: {
-		           withCredentials: true
-	            },
-                //crossDomain: true,
-                success: function(resp) {
-
-						 shost = resp.host;
-						 if(resp.session==1) {
-						    // ############################################
-							// #### we have a sessions ->redirect to the view
-							$("#uname").html(resp.uname);
-							initView();
-
-						 } else {
-						    // not logged in -> redirect to login
-							//alert('Replace to: ' + 'https://' + shost + '/login.html' + '  response: ' + resp );
-							window.location.replace('https://' + shost + '/login.html');
-						 }
-					  },
-				error: function(xhr, status, error ) {
-				   // an error occured -> just redirect to the login page...
-				   window.location.replace('/login.html');
-				}
-		});
-		});
-
-	  </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Solar">
+  <title>Solar Monitor</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/common.js"></script>
+  <script src="libs/echarts.min.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div id="logout"> <div class="divleft"><p id="uname"> Username</p></div> <img id="logout" class="logoutImg" src="img/logout-8.svg"></div>
-<!--
-<header class="header">
-	<div class="header-content responsive-wrapper">
-		<div class="header-logo">
-			<a href="#">
-				<div>
-					<img src="https://assets.codepen.io/285131/untitled-ui-icon.svg" />
-				</div>
-				<img src="https://assets.codepen.io/285131/untitled-ui.svg" />
-			</a>
-		</div>
-		<div class="header-navigation">
-			<nav class="header-navigation-links">
-				<a href="#"> Home </a>
-				<a href="#"> Dashboard </a>
-			</nav>
-			<div class="header-navigation-actions">
-				<a href="#" class="icon-button">
-					<i class="ph-gear-bold"></i>
-				</a>
-				<a href="#" class="avatar">
-					<img src="https://uifaces.co/our-content/donated/gPZwCbdS.jpg" alt="" />
-				</a>
-			</div>
-		</div>
-		<a href="#" class="button">
-			<i class="ph-list-bold"></i>
-			<span>Menu</span>
-		</a>
-	</div>
-</header>
--->
-<main class="solmain">
-	<div class="responsive-wrapper">
-		<div class="solcontent">
-			<!-- not needed any more
-			<div class="solcontent-panel">
-				<div class="vertical-tabs">
-					<a href="#" class="active">Current Status</a>
-					<a href="#">Day Statistics</a>
-					<a href="#">Month Statistics</a>
-					<a href="#">Year Statistics</a>
-				</div>
-			</div>
-			-->
-			<div class="solcontent-main">
-			    <div class="plot-grid">
-					<article class="plot">
-						<div class="card-header">
-							<div>
-								<h3>Current Sample</h3>
-							</div>
-							<div id="statusTimeStamp" class="status-hea"></div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span id="brand-logo"></span>Solar Monitor</div>
+      <div class="spacer"></div>
+      <button id="btn-theme" class="btn btn-icon" type="button" title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten" data-icon="theme"></button>
+      <div class="user-chip"><span class="avatar" id="avatar">?</span><span id="uname"></span></div>
+      <button id="btn-logout" class="btn" type="button" title="Abmelden"><span data-icon="logout"></span><span class="lbl-logout">Abmelden</span></button>
+    </div>
+  </header>
 
-						</div>
-						<div class="card-body">
-						    <div class="status-grid">
-								<div class="status-card">
-								   <img src="img/solar.png" class="status-img">
-								   <h4>Solar power</h4>
-								   <div class="status-data-div ">
-								     <div id="powersolar">
-								     </div>
-								   </div>
-								</div>
-								<div class="status-card">
-								   <img src="img/house.png" class="status-img">
-								   <h4>Power use</h4>
-								   <div class="status-data-div ">
-								     <div id="poweruse">
-								     </div>
-									</div>
-								</div>
-								<div class="status-card">
-								   <img src="img/grid.png" class="status-img">
-								   <h4>Grid power</h4>
-								   <div class="status-data-div ">
-								     <div id="powergrid">
-								     </div>
-								   </div>
-								</div>
-							</div>
-						</div>
-						<div class="card-footer">
-							<!--<a href="#">View integration</a>-->
-						</div>
-					</article>
-				</div>
-				<div class="plot-grid">
-					<article class="plot">
-						<div class="card-header">
-							<div>
-								<span></span>
-								<h3>Day Chart</h3>
+  <main class="container">
 
-							</div>
-							<div id="datepickerDay"></div>
-						</div>
-						<div class="card-body">
-						    <div id='dayChart'><!-- Plotly chart will be drawn inside this DIV --></div>
+    <!-- ============ Live ============ -->
+    <section class="card" aria-labelledby="h-live">
+      <div class="card-head">
+        <h2 id="h-live">Aktuell</h2>
+        <span class="sub"><span id="live-dot" class="live-dot"></span><span id="live-time">verbinde …</span></span>
+      </div>
+      <div class="live-grid">
+        <svg id="flow" class="flow" role="img" aria-label="Energiefluss zwischen Solaranlage, Haus und Netz"></svg>
 
-						</div>
-						<div class="card-footer">
-							<a href="#">View integration</a>
-						</div>
-					</article>
-				</div>
+        <div class="live-side">
+          <div class="ring-row">
+            <div class="ring-tile" id="rt-autarky">
+              <svg class="ring" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" cx="32" cy="32" r="27" stroke="var(--c-self)"/><text x="32" y="33">–</text></svg>
+              <div><div class="t">Autarkie</div><div class="d">Verbrauch aus PV</div></div>
+            </div>
+            <div class="ring-tile" id="rt-selfcons">
+              <svg class="ring" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" cx="32" cy="32" r="27" stroke="var(--c-pv)"/><text x="32" y="33">–</text></svg>
+              <div><div class="t">Eigenverbrauch</div><div class="d">PV selbst genutzt</div></div>
+            </div>
+          </div>
+          <div class="kv" id="live-kv">
+            <div class="kv-row"><span class="swatch" style="background:var(--c-self)"></span>PV direkt genutzt<b id="k-self">–</b></div>
+            <div class="kv-row"><span class="swatch" style="background:var(--c-pv)"></span>Einspeisung<b id="k-export">–</b></div>
+            <div class="kv-row"><span class="swatch" style="background:var(--c-grid)"></span>Netzbezug<b id="k-import">–</b></div>
+          </div>
+          <div>
+            <div class="card-head" style="margin:6px 0 2px"><span class="sub">Heute bisher</span></div>
+            <div class="kv" id="today-kv">
+              <div class="kv-row">Produktion<b id="t-prod">–</b></div>
+              <div class="kv-row">Verbrauch<b id="t-cons">–</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-				<div class="plot-grid">
-					<article class="plot">
-						<div class="card-header">
-							<div>
-								<span></span>
-								<h3>Days Chart</h3>
-							</div>
-							<div id="datepickerMonth"></div>
-						</div>
-						<div class="card-body">
-						    <div id='daysChart'><!-- Plotly chart will be drawn inside this DIV --></div>
+    <!-- ============ Verlauf ============ -->
+    <section class="card" aria-labelledby="h-hist">
+      <div class="card-head"><h2 id="h-hist">Verlauf</h2></div>
+      <div class="toolbar">
+        <div class="seg" role="tablist" aria-label="Zeitraum">
+          <button role="tab" data-view="day"   aria-selected="true">Tag</button>
+          <button role="tab" data-view="month" aria-selected="false">Monat</button>
+          <button role="tab" data-view="year"  aria-selected="false">Jahr</button>
+          <button role="tab" data-view="total" aria-selected="false">Gesamt</button>
+        </div>
+        <div class="period-nav" id="period-nav">
+          <button class="btn btn-icon" id="btn-prev" type="button" aria-label="Zurück" data-icon="left"></button>
+          <div class="period-label" id="period-label">–</div>
+          <button class="btn btn-icon" id="btn-next" type="button" aria-label="Weiter" data-icon="right"></button>
+          <span class="btn btn-icon date-pick" id="date-pick" title="Datum wählen"><span data-icon="calendar"></span><input type="date" id="date-input" aria-label="Datum wählen"></span>
+          <button class="btn" id="btn-today" type="button">Heute</button>
+        </div>
+      </div>
 
-						</div>
-						<div class="card-footer">
-							<!--<a href="#">View integration</a>-->
-						</div>
-					</article>
-				</div>
+      <div class="kpis" id="kpis"></div>
 
-
-				<div class="plot-grid">
-					<article class="plot">
-						<div class="card-header">
-							<div>
-								<span></span>
-								<h3>Month Chart</h3>
-							</div>
-							<div id="datepickerYear"></div>
-
-						</div>
-						<div class="card-body">
-						    <div id='monthChart'><!-- Plotly chart will be drawn inside this DIV --></div>
-
-						</div>
-						<div class="card-footer">
-							<!--<a href="#">View integration</a>-->
-						</div>
-					</article>
-				</div>
-
-				<div class="plot-grid">
-					<article class="plot">
-						<div class="card-header">
-							<div>
-								<span></span>
-								<h3>Year Chart</h3>
-							</div>
-
-						</div>
-						<div class="card-body">
-						    <div id='yearChart'><!-- Plotly chart will be drawn inside this DIV --></div>
-
-						</div>
-						<div class="card-footer">
-							<!--<a href="#">View integration</a>-->
-						</div>
-					</article>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
-<!-- partial
-  <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
--->
+      <div id="chart" class="chart" role="img" aria-label="Diagramm"></div>
+      <div class="chart-foot">
+        <span id="chart-note"></span>
+        <span class="spacer"></span>
+        <button class="btn" id="btn-table" type="button" aria-expanded="false"><span data-icon="table"></span>Tabelle</button>
+      </div>
+      <div id="table" class="table-wrap hidden"></div>
+    </section>
+  </main>
 </body>
 </html>

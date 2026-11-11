@@ -11,6 +11,9 @@ uses SysUtils, Classes, Fronius.ActionsBase,
     Fronius.DBIntf;
 
 type
+
+  { TFroniusDataPathHandler }
+
   TFroniusDataPathHandler = class(TWebActionBase)
   private
     fDB : IFroniusDBAdapter;
@@ -80,7 +83,6 @@ var fromDate, toDate : TDateTime;
     lastEnCons : double;
     lastEnGrid : double;
     lastEnToGrid : double;
-    fromYear : word;
 begin
      // ###########################################
      // #### Return the day/month/year statistics as "bars"
@@ -116,14 +118,13 @@ begin
           Response.Content := '{"error":1, "msg":"Bad date format"}';
           exit;
      end;
-     fromYear := aYear;
 
      actMon := Max(1, aMonth) - 1;
      actYear := Max(1, aYear) - 1;
 
      aYear := word(getIntParam(Request, 'toYear', CurrentYear));
      aMonth := word(getIntParam(Request, 'toMon', 12));
-     aDay := word(getIntParam(Request, 'fromDay', 0));
+     aDay := word(getIntParam(Request, 'toDay', 0));
      if (aDay = 0) and (aMonth >= 1) and (aMonth <= 12) then
         aDay := MonthDays[IsLeapYear(aYear), aMonth];
 
@@ -387,7 +388,7 @@ end;
 function TFroniusDataPathHandler.FirstYear: word;
 var aMon, aDay : Word;
 begin
-     fDB.SetSQLText('Select first 1 * from Samples');
+     fDB.SetSQLText('Select first 1 * from daystats');
      fDB.ExecQuery;
      Result := CurrentYear;
      if not fDB.Eof then

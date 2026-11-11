@@ -251,7 +251,7 @@ There are a few things on my todo list:
 * Eventually move the current power flow content update to a websocket which is more modern than polling.
 * The setup still requires the sysdba/masterkey standard Firebird user - this needs to be changed. Otherwise the install scripts need to be updated to serve these standard values.
 
-
+Disclaimer: The old frontend was hand written - however the progress of AI has not stopped and I asked it to rewrite the frontend and I think it did a great job here - kudos Claude.
 
 
 
